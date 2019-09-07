@@ -1,9 +1,15 @@
 {
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "useWorkspaces": true,
   "name": "with-custom-babel-config",
   "version": "1.0.0",
   "description": "This example features:",
   "main": "index.js",
   "scripts": {
+    "bootstrap": "lerna clean --yes && lerna bootstrap && lerna run bootstrap",
     "dev": "next",
     "build": "next build",
     "start": "next start"
@@ -23,6 +29,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/plugin-proposal-do-expressions": "7.0.0-rc.1",
+    "lerna": "^3.16.4",
     "prettier": "1.18.2"
   },
   "prettier": {

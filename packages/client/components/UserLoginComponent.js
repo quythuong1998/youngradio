@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserLoginComponent = ({}) => (
+const UserLoginComponent = () => (
   <body className="login-page sidebar-collapse">
     <nav
       className="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg "
@@ -160,7 +160,6 @@ const UserLoginComponent = ({}) => (
             <li className="button-container nav-item iframe-extern">
               <a
                 href="https://www.creative-tim.com/product/material-kit-pro?ref=presentation"
-                target="_blank"
                 className="btn  btn-rose   btn-round btn-block"
               >
                 <i className="material-icons">shopping_cart</i> Buy Now
@@ -276,12 +275,10 @@ const UserLoginComponent = ({}) => (
           </nav>
           <div className="copyright float-right">
             &copy;
-            <script>document.write(new Date().getFullYear())</script>, made with{' '}
+            <script>document.write(new Date().getFullYear())</script>, made with
             <i className="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">
-              Creative Tim
-            </a>{' '}
-            for a better web.
+            <a href="https://www.creative-tim.com">Creative Tim</a> for a better
+            web.
           </div>
         </div>
       </footer>
