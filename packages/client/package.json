@@ -4,15 +4,22 @@
   "description": "This example features:",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "dotenv-webpack": "^1.7.0",
+    "express": "^4.17.1",
     "next": "latest",
+    "next-redux-wrapper": "^3.0.0",
+    "prettier": "1.18.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "prettier": "1.18.2"
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "redux-devtools": "^3.5.0"
   },
   "author": "",
   "license": "ISC",
