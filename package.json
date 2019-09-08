@@ -42,5 +42,16 @@
     "jsxBracketSameLine": false,
     "rcVerbose": true,
     "eslintIntegration": false
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier-eslint --write",
+      "eslint --max-warnings 0 --fix --ignore-pattern '!.importjs.js' ",
+      "git add"
+    ],
+    "*.{css,json,md,graphql}": [
+      "prettier-eslint --write",
+      "git add"
+    ]
   }
 }
