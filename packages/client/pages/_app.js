@@ -7,7 +7,6 @@ import Head from 'next/head';
 
 // import { library } from '@fortawesome/fontawesome-svg-core';
 // import { fas } from '@fortawesome/free-solid-svg-icons';
-
 // library.add(fas);
 
 class AppRedux extends App {
@@ -22,14 +21,14 @@ class AppRedux extends App {
   render() {
     const { Component, store, pageProps } = this.props;
     return (
-      <Container>
+      <React.Fragment>
         <Head>
           <title>{pageProps.title || 'Young Radio'}</title>
         </Head>
         <Provider store={store}>
           <Component {...pageProps} />
         </Provider>
-      </Container>
+      </React.Fragment>
     );
   }
 }
