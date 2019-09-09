@@ -1,17 +1,14 @@
 import React from 'react';
+import HeaderComponent from '../components/header/HeaderComponent';
 
 class HomePageLayout extends React.Component {
   render() {
-    const { children } = this.props;
+    const { children, title, ...restProps } = this.props;
     return (
-      <div>
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="/static/material/assets/css/material-kit.min.css"
-        />
-        {children}
-      </div>
+      <React.Fragment>
+        <HeaderComponent />
+        <div class="main">{children}</div>
+      </React.Fragment>
     );
   }
 }
