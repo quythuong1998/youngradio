@@ -1,9 +1,7 @@
 import { model, Types, Schema } from 'mongoose';
 import uuid from 'uuid';
 import { updateDocBuilder } from './utils';
-import { numberLiteralTypeAnnotation } from '@babel/types';
 
-//just for example!
 const HastagSchema = Schema({
     _id: {
         type: Schema.ObjectId,
@@ -20,6 +18,6 @@ const HastagSchema = Schema({
 
 HastagSchema.methods.updateDoc = updateDocBuilder();
 
-const Hastag = model('Hastag', HastagSchema);
+const Hastags = model('Hastags', HastagSchema);
 
-module.exports = Hastag;
+module.exports = Hastags;

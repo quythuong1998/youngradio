@@ -1,10 +1,11 @@
 import SystemUser from './systemUser';
-import Article from './article';
-import Author from './author';
+import Articles from './article';
+import Authors from './author';
+import Hastags from './hastag';
 
 module.exports = {
   SystemUser,
-  Article,
-  Author,
-  Hastag
+  Articles,
+  Authors,
+  Hastags
 };

@@ -1,9 +1,7 @@
 import { model, Types, Schema } from 'mongoose';
 import uuid from 'uuid';
 import { updateDocBuilder } from './utils';
-import { numberLiteralTypeAnnotation } from '@babel/types';
 
-//just for example!
 const AuthorSchema = Schema({
     _id: {
         type: Schema.ObjectId,
@@ -15,17 +13,24 @@ const AuthorSchema = Schema({
         default: uuid,
         required: true
     },
-    name: String,
-    age: Number,
-    stories: [{
-        type: Schema.Types.ObjectId, ref: 'Article'
-    }]
+    first_name: { type: String, required: true },
+    last_name: { type: String, require: true },
+    gender: Number,
+    email: { type: String, required: true },
+    birth_date: String,
+    created_at: {
+        type: Date,
+        default: Date.now,
+        required: true
+    },
+    updated_at: {
+        type: Date,
+        default: Date.now,
+        required: true
+    }
 });
 
 ArticleSchema.methods.updateDoc = updateDocBuilder();
+const Authors = model('Authors', AuthorSchema);
 
-const Article = model('Article', ArticleSchema);
-const Author = model('Author', AuthorSchema);
-
-module.exports = Article;
 module.exports = Author;

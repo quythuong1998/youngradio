@@ -2,7 +2,6 @@ import { model, Types, Schema } from 'mongoose';
 import uuid from 'uuid';
 import { updateDocBuilder } from './utils';
 
-//just for example!
 const ArticleSchema = Schema({
     _id: {
         type: Schema.ObjectId,
@@ -14,21 +13,28 @@ const ArticleSchema = Schema({
         default: uuid,
         required: true
     },
-    title: String,
-    content: String,
-    author: String,
-    date: {
-        type: Date, default: Date.now
+    title: {
+        type: String,
+        required: true
     },
-    hastag: [{
-        type: Schema.Types.String, ref: 'Hastag'
-    }]
+    content: {
+        type: String,
+        required: true
+    },
+    author: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+        required: true
+    },
+    hastags: [String]
 });
 
 ArticleSchema.methods.updateDoc = updateDocBuilder();
 
-const Article = model('Article', ArticleSchema);
-const Hastag = model('Hastag', HastagSchema);
+const Articles = model('Articles', ArticleSchema);
 
-module.exports = Article;
-module.exports = Hastag;
+module.exports = Articles;

@@ -1,3 +1,3 @@
-import Author from '../models/author';
+import Authors from '../models/author';
 
-module.exports = Author;
+module.exports = Authors;

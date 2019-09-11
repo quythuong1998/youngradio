@@ -1,3 +1,3 @@
-import Article from '../models/article';
+import Articles from '../models/article';
 
-module.exports = Article;
+module.exports = Articles;

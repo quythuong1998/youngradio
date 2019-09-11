@@ -1,3 +1,3 @@
-import Hastag from '../models/hastag';
+import Hastags from '../models/hastag';
 
-module.exports = Hastag;
+module.exports = Hastags;
