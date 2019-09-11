@@ -1,5 +1,5 @@
-import SystemUser from './systemUser';
+import SystemUsers from './systemUser';
 
 module.exports = {
-  SystemUser
+  SystemUsers
 };
