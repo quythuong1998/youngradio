@@ -30,7 +30,7 @@ const AuthorSchema = Schema({
     }
 });
 
-ArticleSchema.methods.updateDoc = updateDocBuilder();
+AuthorSchema.methods.updateDoc = updateDocBuilder();
 const Authors = model('Authors', AuthorSchema);
 
-module.exports = Author;
+module.exports = Authors;

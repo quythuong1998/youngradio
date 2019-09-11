@@ -1,0 +1,9 @@
+type Category {
+    id: ID!
+    name: String!
+    description: String!
+}
+
+type Query {
+    get_all_category: [Category!]!
+}
