@@ -1,5 +1,11 @@
-import SystemUsers from './systemUser';
+import SystemUser from './systemUser';
+import Articles from './article';
+import Authors from './author';
+import Hastags from './hastag';
 
 module.exports = {
-  SystemUsers
+  SystemUser,
+  Articles,
+  Authors,
+  Hastags
 };

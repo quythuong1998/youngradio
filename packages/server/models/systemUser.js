@@ -9,9 +9,10 @@ const SystemUserSchema = Schema({
     type: Schema.ObjectId,
     default: Types.ObjectId
   },
-  id: {
+  id:
+  {
     type: String,
-    default: uuid,
+    default: uuid,// do
     required: true
   },
   username: { type: String, required: true },
@@ -38,14 +39,14 @@ const SystemUserSchema = Schema({
   }
 });
 
-SystemUserSchema.pre('save', function(next) {
+SystemUserSchema.pre('save', function (next) {
   var user = this;
   if (this.isModified('password') || this.isNew) {
-    bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.genSalt(10, function (err, salt) {
       if (err) {
         return next(err);
       }
-      bcrypt.hash(user.password, salt, function(err, hash) {
+      bcrypt.hash(user.password, salt, function (err, hash) {
         if (err) {
           return next(err);
         }
@@ -61,7 +62,7 @@ SystemUserSchema.pre('save', function(next) {
 SystemUserSchema.pre('save', updateTimeWhenSave);
 SystemUserSchema.methods.updateDoc = updateDocBuilder();
 
-SystemUserSchema.methods.comparePassword = function(password) {
+SystemUserSchema.methods.comparePassword = function (password) {
   try {
     return bcrypt.compare(password, this.password);
   } catch (err) {
