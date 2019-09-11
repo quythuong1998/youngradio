@@ -1,10 +1,14 @@
 import React from 'react';
 
-const PasswordCondition = () => (
-  <div className="text-muted">
-    Password must be at least eight characters, should contain uppercase and
-    lowercase characters, numbers, spaces, and special characters.
-  </div>
+import HomePageLayout from '../layouts/HomePageLayout';
+import FeaturePostsComponent from '../components/FeaturePostsComponent';
+import LastedBlogPostsComponent from '../components/LastedBlogPostsComponent';
+
+const UserLogin = rootProps => (
+  <HomePageLayout {...rootProps} title="not config">
+    {/* <FeaturePostsComponent /> */}
+    <LastedBlogPostsComponent />
+  </HomePageLayout>
 );
 
-export default PasswordCondition;
+export default UserLogin;

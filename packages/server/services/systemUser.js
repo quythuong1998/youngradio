@@ -1,3 +1,3 @@
-import SystemUser from '../models/systemUser';
+import SystemUsers from '../models/systemUser';
 
-module.exports = SystemUser;
+module.exports = SystemUsers;

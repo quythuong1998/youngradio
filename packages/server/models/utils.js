@@ -9,3 +9,8 @@ export const updateDocBuilder = ({ formatData } = {}) => {
     return this;
   };
 };
+
+export const updateTimeWhenSave = function(next) {
+  this.updated_at = Date.now();
+  next();
+};
