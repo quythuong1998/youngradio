@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderComponent from '../components/header/HeaderComponent';
+import FooterComponent from '../components/footer/FooterComponent';
 
 class HomePageLayout extends React.Component {
   render() {
@@ -7,7 +8,8 @@ class HomePageLayout extends React.Component {
     return (
       <React.Fragment>
         <HeaderComponent />
-        <div class="main">{children}</div>
+        {children}
+        <FooterComponent />
       </React.Fragment>
     );
   }

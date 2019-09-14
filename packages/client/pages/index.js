@@ -1,13 +1,10 @@
 import React from 'react';
-
 import HomePageLayout from '../layouts/HomePageLayout';
-import FeaturePostsComponent from '../components/FeaturePostsComponent';
-import LastedBlogPostsComponent from '../components/LastedBlogPostsComponent';
 
+import IndexBodyComponent from '../components/IndexBodyComponent';
 const UserLogin = rootProps => (
   <HomePageLayout {...rootProps} title="not config">
-    {/* <FeaturePostsComponent /> */}
-    <LastedBlogPostsComponent />
+    <IndexBodyComponent />
   </HomePageLayout>
 );
 

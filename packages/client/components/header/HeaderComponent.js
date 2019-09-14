@@ -4,7 +4,6 @@ import HeaderTitleComponent from './HeaderTitleComponent';
 import IndexDescriptionsComponent from './IndexDescriptionsComponent';
 import HeaderInfoComponent from './HeaderInfoComponent';
 
-//check if user login then render HeaderInfoComponent (dropdown)
 const HeaderComponent = () => (
   <React.Fragment>
     <nav
