@@ -9,9 +9,9 @@ const GET_ALL_CATEGORY_API = 'GetAllCategoryAPI';
 const GetAllCategoryAPI = makeFetchAction(
   GET_ALL_CATEGORY_API,
   gql`
-    query() {
+    query {
       get_all_category {
-       name
+        name
       }
     }
   `
@@ -23,7 +23,6 @@ export const getAllCategory = () => {
       console.error('Err:', resp.errors);
       return;
     }
-    saveToken(resp.data.get_all_category);
     return;
   });
 };

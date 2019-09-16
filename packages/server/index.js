@@ -6,7 +6,33 @@ import schema from './graphql';
 //using pubsub later in there: import listeners from './pubsub';
 
 const server = new ApolloServer({
-  schema
+  schema,
+  context: async ({ req, res }) => {
+    const currentToken = (req.headers.authorization || '').substr(7);
+
+    // try {
+    //   //do not check session for this phase
+    //   // if (!isVerifiedSession(req.session, currentToken)) {
+    //   //   throw new AuthenticationError(
+    //   //     'you are unauthorized to do this action!'
+    //   //   );
+    //   // }
+
+    //   const payload = await auth.verify(currentToken);
+
+    //   const [currentUser, currentPartner] = await Promise.all([
+    //     Base.getUserByType(payload),
+    //     Base.getCurrentPartner(payload)
+    //   ]);
+
+    return {
+      req,
+      res
+    };
+    // } catch (error) {
+    //   throw error;
+    // }
+  }
 });
 
 server.applyMiddleware({

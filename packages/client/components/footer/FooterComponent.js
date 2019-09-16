@@ -2,7 +2,7 @@ import React from 'react';
 
 const FooterComponent = () => (
   <React.Fragment>
-    <footer classNameName="footer">
+    <footer className="footer">
       <div className="container">
         <nav className="float-left">
           <ul>

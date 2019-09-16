@@ -1,6 +1,8 @@
 import { model, Types, Schema } from 'mongoose';
 import uuid from 'uuid';
 import { updateDocBuilder } from './utils';
+import bcrypt from 'bcryptjs';
+import { USER_PENDING } from '../enums/userStatus';
 
 const AuthorSchema = Schema({
   _id: {
@@ -12,11 +14,19 @@ const AuthorSchema = Schema({
     default: uuid,
     required: true
   },
+  username: { type: String, required: true },
+  password: { type: String, required: true },
   first_name: { type: String, required: true },
   last_name: { type: String, require: true },
   gender: Number,
   email: { type: String, required: true },
   birth_date: String,
+  quote: String,
+  status: {
+    type: Number,
+    default: USER_PENDING,
+    required: true
+  },
   created_at: {
     type: Date,
     default: Date.now,

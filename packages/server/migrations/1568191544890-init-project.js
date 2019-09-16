@@ -1,8 +1,19 @@
 import mongoose from 'mongoose';
-import uuid from 'uuid';
 
-import { SystemUsers } from '../services';
+import { SystemUsers, Authors } from '../services';
 import { ADMIN } from '../enums/userRole';
+import { MALE } from '../enums/userGender';
+
+const authorUser = {
+  username: 'author',
+  password: '123456',
+  first_name: 'Young Radio',
+  last_name: 'Author',
+  email: 'youngradio.author@gmail.com',
+  gender: MALE,
+  birth_date: '19/10/1998',
+  quote: 'Death is like a wind, always by my side.'
+};
 
 const systemUser = {
   username: 'admin',
@@ -10,10 +21,13 @@ const systemUser = {
   first_name: 'Young',
   last_name: 'Radio',
   role: ADMIN,
-  email: 'youngradio.email@gmail.com'
+  email: 'youngradio.admin@gmail.com',
+  gender: MALE,
+  birth_date: '19/10/1998'
 };
 
 const insertSystemUser = () => new SystemUsers(systemUser).save();
+const insertAuthorUser = () => new Authors(authorUser).save();
 
 const { MONGO_URL, MONGO_DB, MONGO_OPTIONS } = process.env;
 
@@ -31,7 +45,6 @@ const connectDb = () => {
       if (err) {
         reject(err);
       }
-      console.log('resolved');
       resolve(mongoose);
     });
   });
@@ -40,11 +53,14 @@ const connectDb = () => {
 module.exports.up = async function() {
   const db = await connectDb();
   await insertSystemUser();
+  await insertAuthorUser();
   await db.disconnect();
 };
 
 module.exports.down = async function() {
   const db = await connectDb();
   await SystemUsers.deleteOne({ username: systemUser.username });
+  await Authors.deleteOne({ username: authorUser.username });
+
   await db.disconnect();
 };
