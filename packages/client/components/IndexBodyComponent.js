@@ -29,7 +29,7 @@ class IndexBodyComponent extends React.Component {
           <div className="section">
             <div className="row">
               <div className="col-md-8 ml-auto mr-auto text-center">
-                <h2 class="title">From my heart with love ...</h2>
+                <h2 className="title">From my heart with love ...</h2>
                 <ul className="nav nav-pills nav-pills-primary justify-content-center">
                   <li className="nav-item">
                     <a

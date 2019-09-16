@@ -1,28 +1,28 @@
 import React from 'react';
-import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import {} from '../store/CategoryState';
+import { getAllCategory, getAllCategorySelector } from '../store/CategoryState';
 
-// const connectToRedux = connect(
-//   createStructuredSelector(
-//     {
-//       categories: getAllCategorySelector
-//     },
-//     dispatch => ({
-//       getAllCategory: () => {
-//         dispatch(getAllCategory());
-//       }
-//     })
-//   )
-// );
+const connectToRedux = connect(
+  createStructuredSelector({
+    categories: getAllCategorySelector
+  }),
+  dispatch => ({
+    GetAllCategory: () => {
+      dispatch(getAllCategory());
+    }
+  })
+);
+
 class CategoryDropdownComponent extends React.Component {
-  // componentWillMount() {
-  //   this.props.getAllCategorySelector();
-  // }
+  componentDidMount() {
+    this.props.GetAllCategory();
+  }
 
   render() {
+    const { categories = [] } = this.props;
+
     return (
       <React.Fragment>
         <li className="nav-item">
@@ -31,7 +31,6 @@ class CategoryDropdownComponent extends React.Component {
             <div className="ripple-container"></div>
           </a>
         </li>
-
         <li className="dropdown nav-item">
           <a
             href="#"
@@ -41,18 +40,12 @@ class CategoryDropdownComponent extends React.Component {
             <i className="material-icons">apps</i> All categories
           </a>
           <div className="dropdown-menu dropdown-with-icons">
-            <a href="../presentation.html" className="dropdown-item">
-              <i className="material-icons">layers</i> Presentation
-            </a>
-            <a href="../index.html" className="dropdown-item">
-              <i className="material-icons">line_style</i> All Components
-            </a>
-            <a
-              href="http://demos.creative-tim.com/material-kit-pro/docs/2.1/getting-started/introduction.html"
-              className="dropdown-item"
-            >
-              <i className="material-icons">content_paste</i> Documentation
-            </a>
+            {categories &&
+              categories.map(item => (
+                <a href="#" className="dropdown-item">
+                  <i className="material-icons">layers</i> {item.name}
+                </a>
+              ))}
           </div>
         </li>
       </React.Fragment>
@@ -60,4 +53,4 @@ class CategoryDropdownComponent extends React.Component {
   }
 }
 
-export default CategoryDropdownComponent;
+export default connectToRedux(CategoryDropdownComponent);
