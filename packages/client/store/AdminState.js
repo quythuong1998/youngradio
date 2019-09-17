@@ -1,7 +1,7 @@
 import { makeFetchAction } from 'redux-api-call';
 import { respondToSuccess } from '../middlewares/api-reaction';
 import Router from 'next/router';
-import { flow, includes, join, map, path, get } from 'lodash/fp';
+import { flow, includes, join, map, path, get, brn } from 'lodash/fp';
 import { gql } from '../libs';
 
 const ADMIN_LOGIN_API = 'AdminLoginAPI';
