@@ -1,10 +1,11 @@
 import { model, Types, Schema } from 'mongoose';
 import uuid from 'uuid';
-import { updateDocBuilder, updateTimeWhenSave } from './utils';
-import { ADMIN } from '../enums/userRole';
+import { updateDocBuilder } from './utils';
 import bcrypt from 'bcryptjs';
+import { USER_PENDING } from '../enums/userStatus';
+import { AUTHOR } from '../enums/userRole';
 
-const SystemUserSchema = Schema({
+const UserSchema = Schema({
   _id: {
     type: Schema.ObjectId,
     default: Types.ObjectId
@@ -21,9 +22,15 @@ const SystemUserSchema = Schema({
   gender: Number,
   email: { type: String, required: true },
   birth_date: String,
+  quote: String,
+  status: {
+    type: Number,
+    default: USER_PENDING,
+    required: true
+  },
   role: {
     type: Number,
-    default: ADMIN,
+    default: AUTHOR,
     required: true
   },
   created_at: {
@@ -35,10 +42,13 @@ const SystemUserSchema = Schema({
     type: Date,
     default: Date.now,
     required: true
-  }
+  },
+  avatar: String
 });
 
-SystemUserSchema.pre('save', function(next) {
+UserSchema.methods.updateDoc = updateDocBuilder();
+
+UserSchema.pre('save', function(next) {
   var user = this;
   if (this.isModified('password') || this.isNew) {
     bcrypt.genSalt(10, function(err, salt) {
@@ -55,13 +65,14 @@ SystemUserSchema.pre('save', function(next) {
       });
     });
   } else {
+    if (user.username) {
+      user.username = user.username.toLowerCase();
+    }
     return next();
   }
 });
-SystemUserSchema.pre('save', updateTimeWhenSave);
-SystemUserSchema.methods.updateDoc = updateDocBuilder();
 
-SystemUserSchema.methods.comparePassword = function(password) {
+UserSchema.methods.comparePassword = function(password) {
   try {
     return bcrypt.compare(password, this.password);
   } catch (err) {
@@ -69,5 +80,6 @@ SystemUserSchema.methods.comparePassword = function(password) {
   }
 };
 
-const SystemUsers = model('SystemUsers', SystemUserSchema);
-module.exports = SystemUsers;
+const Users = model('Users', UserSchema);
+
+module.exports = Users;

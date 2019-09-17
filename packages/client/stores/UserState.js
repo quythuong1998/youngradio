@@ -4,13 +4,13 @@ import Router from 'next/router';
 import { flow, includes, join, map, path, get, brn } from 'lodash/fp';
 import { gql, saveToken } from '../libs';
 
-const AUTHOR_LOGIN_API = 'AuthorLoginAPI';
+const USER_LOGIN_API = 'UserLoginAPI';
 
-const AuthorLoginAPI = makeFetchAction(
-  AUTHOR_LOGIN_API,
+const UserLoginAPI = makeFetchAction(
+  USER_LOGIN_API,
   gql`
     query($username: String!, $password: String!) {
-      login_author(username: $username, password: $password) {
+      login_user(username: $username, password: $password) {
         id
         fullName
         token
@@ -19,23 +19,23 @@ const AuthorLoginAPI = makeFetchAction(
   `
 );
 
-export const authorLogin = (username, password) => {
+export const userLogin = (username, password) => {
   return respondToSuccess(
-    AuthorLoginAPI.actionCreator({ username, password }),
+    UserLoginAPI.actionCreator({ username, password }),
     resp => {
       if (resp.errors) {
         console.error('Err:', resp.errors);
         return;
       }
-      saveToken(resp.data.login_author.token);
+      saveToken(resp.data.login_user.token);
       Router.push('/');
       return;
     }
   );
 };
 
-export const authorLoginErrorMessageSelector = flow(
-  AuthorLoginAPI.dataSelector,
+export const userLoginErrorMessageSelector = flow(
+  UserLoginAPI.dataSelector,
   path('errors'),
   map('message'),
   join(' | ')

@@ -2,7 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { getAllCategory, getAllCategorySelector } from '../store/CategoryState';
+import {
+  getAllCategory,
+  getAllCategorySelector
+} from '../stores/CategoryState';
 
 const connectToRedux = connect(
   createStructuredSelector({
