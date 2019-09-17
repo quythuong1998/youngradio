@@ -15,6 +15,15 @@ const generateSessionKey = flow(
   split('.'),
   brn(nth(2), nth(2), nth(0))
 );
+/*
+for example:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJlYWNiODA2LTA5YTYtNGVjOC1hZmY4LTIwZWFlNTVhOGY2ZiIsInVzZXJuYW1lIjoiYXV0aG9yIiwiZmlyc3RfbmFtZSI6IllvdW5nIFJhZGlvIiwibGFzdF9uYW1lIjoiQXV0aG9yIiwiZW1haWwiOiJ5b3VuZ3JhZGlvLmF1dGhvckBnbWFpbC5jb20iLCJpYXQiOjE1Njg3MjQ1NzAsImV4cCI6MTU2OTMyOTM3MH0.Xk5h4Zqy31QePyzXUjr3huL_sEFec6bhvbZ7cjLTKDM
+split(.) -> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+            eyJpZCI6IjJlYWNiODA2LTA5YTYtNGVjOC1hZmY4LTIwZWFlNTVhOGY2ZiIsInVzZXJuYW1lIjoiYXV0aG9yIiwiZmlyc3RfbmFtZSI6IllvdW5nIFJhZGlvIiwibGFzdF9uYW1lIjoiQXV0aG9yIiwiZW1haWwiOiJ5b3VuZ3JhZGlvLmF1dGhvckBnbWFpbC5jb20iLCJpYXQiOjE1Njg3MjQ1NzAsImV4cCI6MTU2OTMyOTM3MH0
+            Xk5h4Zqy31QePyzXUjr3huL_sEFec6bhvbZ7cjLTKDM
+brn(x, y, z) -> x = true -> y or -> z
+so, token here is: Xk5h4Zqy31QePyzXUjr3huL_sEFec6bhvbZ7cjLTKDM
+*/
 
 export const saveSession = (session, token) => {
   if (session) {

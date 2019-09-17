@@ -1,12 +1,12 @@
 import React from 'react';
 
-import HomePageLayout from '../layouts/HomePageLayout';
+import EmptyPageLayout from '../layouts/EmptyPageLayout';
 import UserLoginComponent from '../components/UserLoginComponent';
 
 const UserLogin = rootProps => (
-  <HomePageLayout>
+  <EmptyPageLayout>
     <UserLoginComponent />
-  </HomePageLayout>
+  </EmptyPageLayout>
 );
 
 export default UserLogin;
