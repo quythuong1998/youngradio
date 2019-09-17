@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-
-import { SystemUsers, Authors } from '../services';
-import { ADMIN } from '../enums/userRole';
+import { Users } from '../services';
 import { MALE } from '../enums/userGender';
+import { USER_ACTIVE } from '../enums/userStatus';
+import { AUTHOR, ADMIN } from '../enums/userRole';
 
 const authorUser = {
   username: 'author',
@@ -12,22 +12,26 @@ const authorUser = {
   email: 'youngradio.author@gmail.com',
   gender: MALE,
   birth_date: '19/10/1998',
-  quote: 'Death is like a wind, always by my side.'
+  quote: 'Death is like a wind, always by my side.',
+  status: USER_ACTIVE,
+  role: AUTHOR
 };
 
 const systemUser = {
   username: 'admin',
   password: '123456',
-  first_name: 'Young',
-  last_name: 'Radio',
-  role: ADMIN,
+  first_name: 'Young Radio',
+  last_name: 'Admin',
   email: 'youngradio.admin@gmail.com',
   gender: MALE,
-  birth_date: '19/10/1998'
+  birth_date: '19/10/1998',
+  quote: 'Death is like a wind, always by my side.',
+  status: USER_ACTIVE,
+  role: ADMIN
 };
 
-const insertSystemUser = () => new SystemUsers(systemUser).save();
-const insertAuthorUser = () => new Authors(authorUser).save();
+const insertSystemUser = () => new Users(systemUser).save();
+const insertAuthorUser = () => new Users(authorUser).save();
 
 const { MONGO_URL, MONGO_DB, MONGO_OPTIONS } = process.env;
 
@@ -59,8 +63,11 @@ module.exports.up = async function() {
 
 module.exports.down = async function() {
   const db = await connectDb();
-  await SystemUsers.deleteOne({ username: systemUser.username });
-  await Authors.deleteOne({ username: authorUser.username });
+
+  await Promise.all([
+    Users.deleteOne({ username: systemUser.username }),
+    Users.deleteOne({ username: authorUser.username })
+  ]);
 
   await db.disconnect();
 };
