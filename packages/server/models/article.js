@@ -24,9 +24,9 @@ const ArticleSchema = Schema({
     type: String,
     required: true
   },
-  date: {
-    type: Date,
-    default: Date.now,
+  view: {
+    type: Number,
+    default: 0,
     required: true
   },
   hastags: [String],
