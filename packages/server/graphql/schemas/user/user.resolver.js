@@ -33,6 +33,8 @@ module.exports = {
     firstName: path('first_name'),
     lastName: path('last_name'),
     birthDate: path('birth_date'),
+    createdAt: path('created_at'),
+    updatedAt: path('updated_at'),
     token: (user, _, { req }) => {
       const jwt = auth.sign(user);
       saveSession(req.session, jwt);

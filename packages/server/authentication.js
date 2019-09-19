@@ -9,6 +9,7 @@
 
 import { sign, verify } from 'jsonwebtoken';
 import { pick } from 'lodash/fp';
+import jwt from 'jsonwebtoken';
 
 function TokenGenerator(secretOrPrivateKey, secretOrPublicKey, options) {
   this.secretOrPrivateKey = process.env.JWT_SECRET || 'jwt-secret';
@@ -41,6 +42,23 @@ TokenGenerator.prototype.refresh = function(token, refreshOptions) {
   });
   // The first signing converted all needed options into claims, they are already in the payload
   return sign(payload, this.secretOrPrivateKey, jwtSignOptions);
+};
+
+TokenGenerator.prototype.verify = async function(token, verifyOptions = {}) {
+  try {
+    if (!token) {
+      return null;
+    }
+
+    const options = ({}, this.verifyOptions, verifyOptions);
+
+    const payload = await jwt.verify(token, this.secretOrPrivateKey, options);
+
+    return payload;
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
 };
 
 module.exports = new TokenGenerator();
