@@ -39,6 +39,10 @@ const ArticleSchema = Schema({
     type: Date,
     default: Date.now,
     required: true
+  },
+  image_description: {
+    type: String,
+    required: true
   }
 });
 
