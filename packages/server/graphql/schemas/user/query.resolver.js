@@ -2,6 +2,7 @@ import { Users, Articles } from '../../../services';
 
 import { combineResolvers } from 'graphql-resolvers';
 import { checkAuthentication } from '../../libs';
+import { ADMIN } from '../../../enums/userRole';
 
 module.exports = {
   Query: {
@@ -25,6 +26,7 @@ module.exports = {
       }
       return authorsTypical;
     },
+
     get_current_user: combineResolvers(
       checkAuthentication,
       (_, __, { currentUser }) => {

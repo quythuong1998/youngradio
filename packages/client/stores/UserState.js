@@ -6,6 +6,8 @@ import { gql, saveToken, nfetch, removeToken } from '../libs';
 
 const USER_LOGIN_API = 'UserLoginAPI';
 const GET_CURRENT_USER_API = 'GetCurrentUserAPI';
+const USER_LOGOUT = 'UserLogout';
+const USER_LOGOUT_API = 'UserLogoutAPI';
 
 const UserLoginAPI = makeFetchAction(
   USER_LOGIN_API,
@@ -74,10 +76,17 @@ export const getCurrentUser = () =>
   respondToSuccess(GetCurrentUserAPI.actionCreator({}), resp => {
     if (resp.errors) {
       console.error(resp.errors);
+<<<<<<< HEAD
       return Router.push('/login');
     }
     if (!verifyScopeAndRole(resp.data.get_current_user)) {
       return Router.push('/login');
+=======
+      return Router.replace('/login');
+    }
+    if (!verifyScopeAndRole(resp.data.get_current_user)) {
+      return Router.replace('/login');
+>>>>>>> origin/develop
     }
   });
 
@@ -88,9 +97,25 @@ export const getCurrentUserDataSelector = flow(
 
 const isUserLoggedIn = has('json.data.get_current_user');
 
+<<<<<<< HEAD
 // export const doLogout = () => ({
 //   type: USER_LOGOUT
 // });
+=======
+export const doLogout = () => [
+  {
+    type: USER_LOGOUT
+  },
+  userLogout()
+];
+
+const UserLogoutAPI = makeFetchAction(
+  USER_LOGOUT_API,
+  nfetch({ endpoint: '/signout' })
+);
+
+export const userLogout = () => respondToSuccess(UserLogoutAPI.actionCreator());
+>>>>>>> origin/develop
 
 export default {
   connectStatus(state = false, { type, payload }) {
@@ -105,11 +130,19 @@ export default {
       return false;
     }
 
+<<<<<<< HEAD
     // if (type === USER_LOGOUT) {
     //   removeToken();
     //   Router.push('/login');
     //   return false;
     // }
+=======
+    if (type === USER_LOGOUT) {
+      removeToken();
+      Router.push('/login');
+      return false;
+    }
+>>>>>>> origin/develop
 
     return state;
   }
