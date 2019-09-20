@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Provider } from 'react-redux';
 import App, { Container } from 'next/app';
-import store from '../store/store';
+import store from '../stores/store';
 import withRedux from 'next-redux-wrapper';
 import Head from 'next/head';
 

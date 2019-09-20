@@ -1,11 +1,11 @@
 import React from 'react';
 
 import EmptyPageLayout from '../layouts/EmptyPageLayout';
-import AuthorLoginComponent from '../components/AuthorLoginComponent';
+import UserLoginComponent from '../components/UserLoginComponent';
 
 const UserLogin = rootProps => (
   <EmptyPageLayout>
-    <AuthorLoginComponent />
+    <UserLoginComponent />
   </EmptyPageLayout>
 );
 

@@ -1,4 +1,4 @@
-type Author {
+type User {
   id: ID!
   username: String!
   password: String!
@@ -13,11 +13,13 @@ type Author {
   createdAt: DateTime!
   updatedAt: DateTime!
   status: UserStatus!
+  role: Role!
   avatar: String!
 }
 
 type Query {
-  login_author(username: String!, password: String!): Author!
+  login_user(username: String!, password: String!): User!
+  get_current_user: User!
 }
 
 enum UserStatus {
@@ -29,4 +31,9 @@ enum UserStatus {
 enum Gender {
   MALE
   FEMALE
+}
+
+enum Role {
+  ADMIN
+  AUTHOR
 }

@@ -2,7 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { getAllCategory, getAllCategorySelector } from '../store/CategoryState';
+import {
+  getAllCategory,
+  getAllCategorySelector
+} from '../stores/CategoryState';
 
 const connectToRedux = connect(
   createStructuredSelector({
@@ -41,8 +44,8 @@ class CategoryDropdownComponent extends React.Component {
           </a>
           <div className="dropdown-menu dropdown-with-icons">
             {categories &&
-              categories.map(item => (
-                <a href="#" className="dropdown-item">
+              categories.map((item, index) => (
+                <a href="#" className="dropdown-item" key={index}>
                   <i className="material-icons">layers</i> {item.name}
                 </a>
               ))}

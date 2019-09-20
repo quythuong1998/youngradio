@@ -3,21 +3,18 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose, withState } from 'recompose';
 
-import {
-  authorLogin,
-  authorLoginErrorMessageSelector
-} from '../store/AuthorState';
+import { userLogin, userLoginErrorMessageSelector } from '../stores/UserState';
 
 const withUsernameState = withState('username', 'setUsername', '');
 const withPasswordState = withState('password', 'setPassword', '');
 
 const connectToRedux = connect(
   createStructuredSelector({
-    errorMessage: authorLoginErrorMessageSelector
+    errorMessage: userLoginErrorMessageSelector
   }),
   dispatch => ({
     doLogin: (username, password) =>
-      username && password && dispatch(authorLogin(username, password))
+      username && password && dispatch(userLogin(username, password))
   })
 );
 
@@ -27,7 +24,7 @@ const enhance = compose(
   connectToRedux
 );
 
-const AuthorLoginComponent = ({
+const UserLoginComponent = ({
   doLogin,
   username,
   password,
@@ -35,7 +32,7 @@ const AuthorLoginComponent = ({
   setPassword,
   errorMessage
 }) => (
-  <body className="login-page sidebar-collapse">
+  <div className="login-page sidebar-collapse">
     <div className="page-header header-filter background-test">
       <div className="container">
         <div className="row">
@@ -127,7 +124,7 @@ const AuthorLoginComponent = ({
         x-flow: row wrap;
       }
     `}</style>
-  </body>
+  </div>
 );
 
-export default enhance(AuthorLoginComponent);
+export default enhance(UserLoginComponent);

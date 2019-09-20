@@ -1,5 +1,6 @@
 import { path } from 'lodash/fp';
 import { MALE, FEMALE } from '../../../enums/userGender';
+import { AUTHOR, ADMIN } from '../../../enums/userRole';
 import {
   USER_PENDING,
   USER_ACTIVE,
@@ -19,16 +20,23 @@ module.exports = {
     MALE
   },
 
-  Author: {
-    fullName: author =>
-      author.first_name && author.last_name
-        ? author.first_name + ' ' + author.last_name
-        : author.email,
+  Role: {
+    ADMIN,
+    AUTHOR
+  },
+
+  User: {
+    fullName: user =>
+      user.first_name && user.last_name
+        ? user.first_name + ' ' + user.last_name
+        : user.email,
     firstName: path('first_name'),
     lastName: path('last_name'),
     birthDate: path('birth_date'),
-    token: (author, _, { req }) => {
-      const jwt = auth.sign(author);
+    createdAt: path('created_at'),
+    updatedAt: path('updated_at'),
+    token: (user, _, { req }) => {
+      const jwt = auth.sign(user);
       saveSession(req.session, jwt);
       return 'bearer ' + jwt;
     }
