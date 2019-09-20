@@ -1,12 +1,18 @@
-type SystemUser {
+type Article {
   id: ID!
-  username: String!
+  title: String!
+  content: String!
+  authorId: String!
+  firstName: String!
+  lastName: String!
+  categoryId: String!
+  hastags: [String]
+  createdAt: String!
+  updatedAt: String!
+  view: String!
+  imageDescription: String! 
 }
 
 type Query {
-  get_system_users: SystemUser!
-}
-
-type Mutation {
-  add_system_users(username: String!): SystemUser!
+  get_most_view_articles(amount: Int!): [Article!]!
 }

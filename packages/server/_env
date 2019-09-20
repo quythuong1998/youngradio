@@ -5,3 +5,7 @@ MONGO_URL="mongodb://localhost:27017"
 MONGO_DB="YoungRadio"
 NODE_ENV=development
 MONGO_OPTIONS="{"useNewUrlParser":true}"
+REDIS_URL="redis://localhost:6379"
+SESSION_SECRET=session-secret
+JWT_SECRET=jwt-secret
+JWT_PUBLIC=jwt-public

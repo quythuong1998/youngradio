@@ -7,4 +7,5 @@ module.exports = {
       return Categories.find();
     }
   }
-};
+}
+

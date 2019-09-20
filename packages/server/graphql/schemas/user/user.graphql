@@ -19,6 +19,7 @@ type User {
 
 type Query {
   login_user(username: String!, password: String!): User!
+  get_three_authors_typical: [[User!]!]
   get_current_user: User!
 }
 
