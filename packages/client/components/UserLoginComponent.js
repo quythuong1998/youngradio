@@ -32,7 +32,7 @@ const UserLoginComponent = ({
   setPassword,
   errorMessage
 }) => (
-  <body className="login-page sidebar-collapse">
+  <div className="login-page sidebar-collapse">
     <div className="page-header header-filter background-test">
       <div className="container">
         <div className="row">
@@ -124,7 +124,7 @@ const UserLoginComponent = ({
         x-flow: row wrap;
       }
     `}</style>
-  </body>
+  </div>
 );
 
 export default enhance(UserLoginComponent);

@@ -1,6 +1,12 @@
 import { Users } from '../../../services';
+<<<<<<< HEAD
 import { Articles } from '../../../services';
 
+=======
+import { combineResolvers } from 'graphql-resolvers';
+import { checkAuthentication } from '../../libs';
+import { ADMIN } from '../../../enums/userRole';
+>>>>>>> origin/develop
 
 module.exports = {
   Query: {
@@ -13,6 +19,7 @@ module.exports = {
       }
       throw new Error('Incorrect username or Password!');
     },
+<<<<<<< HEAD
     get_three_authors_typical: async () => {
       const authorsTypical = [];
       const authorId = await Users.find({});
@@ -26,5 +33,14 @@ module.exports = {
       }
       return authorsTypical;
     }
+=======
+
+    get_current_user: combineResolvers(
+      checkAuthentication,
+      (_, __, { currentUser }) => {
+        return Users.findOne({ id: currentUser.id });
+      }
+    )
+>>>>>>> origin/develop
   }
 };
