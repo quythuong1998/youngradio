@@ -2,12 +2,15 @@ type Article {
   id: ID!
   title: String!
   content: String!
-  author: String!
+  authorId: String!
+  firstName: String!
+  lastName: String!
+  categoryId: String!
   hastags: [String]
   createdAt: String!
   updatedAt: String!
   view: String!
-  imageDescription: String!
+  imageDescription: String! 
 }
 
 type Query {
