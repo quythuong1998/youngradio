@@ -8,8 +8,8 @@ const HeaderInfoComponent = () => (
       <CategoryDropdownComponent />
       <li className="button-container nav-item iframe-extern">
         <Link href="/login">
-          <a className="btn btn-rose btn-round btn-block">
-            <i className="material-icons">fingerprint</i> Login to share post
+          <a className="btn btn-success btn-round btn-block">
+            <i className="material-icons">email</i> Share your post
           </a>
         </Link>
       </li>
