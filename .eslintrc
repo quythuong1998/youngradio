@@ -1,5 +1,10 @@
 {
-  "extends": ["plugin:flowtype/recommended", "prettier", "prettier/babel"],
+  "extends": [
+    "react-app",
+    "plugin:flowtype/recommended",
+    "prettier",
+    "prettier/babel"
+  ],
   "rules": {
     "jsx-a11y/anchor-is-valid": 0,
     "no-unused-vars": [
