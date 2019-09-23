@@ -15,4 +15,5 @@ type Article {
 
 type Query {
   get_most_view_articles(amount: Int!): [Article!]!
+  get_three_post_newest: [Article!]!
 }

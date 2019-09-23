@@ -30,12 +30,12 @@ const ArticleSchema = Schema({
     required: true
   },
   hastags: [String],
-  created_at: {
+  create_at: {
     type: Date,
     default: Date.now,
     required: true
   },
-  updated_at: {
+  update_at: {
     type: Date,
     default: Date.now,
     required: true

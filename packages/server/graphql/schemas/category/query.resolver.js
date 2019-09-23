@@ -1,5 +1,4 @@
-// import { combineResolvers } from 'graphql-resolvers';
-import { Categories } from '../../../services';
+import { Categories, Articles } from '../../../services';
 
 module.exports = {
   Query: {
