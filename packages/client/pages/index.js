@@ -1,10 +1,11 @@
 import React from 'react';
 import HomePageLayout from '../layouts/HomePageLayout';
-import IndexBodyComponent from '../components/IndexBodyComponent';
-const IndexPage = rootProps => (
+import BlogsComponent from '../components/BlogsComponent';
+
+const BlogsPage = rootProps => (
   <HomePageLayout {...rootProps} title="not config">
-    <IndexBodyComponent />
+    <BlogsComponent />
   </HomePageLayout>
 );
 
-export default IndexPage;
+export default BlogsPage;
