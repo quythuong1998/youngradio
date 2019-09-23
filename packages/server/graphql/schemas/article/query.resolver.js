@@ -8,7 +8,7 @@ module.exports = {
         },
 
         get_three_post_newest: async () => {
-            const sortArticles = await Articles.find({}).sort([['create_at', -1]]);
+            const sortArticles = await Articles.find({}).sort([['created_at', -1]]);
             return sortArticles.slice(0, 3);
 
         }
