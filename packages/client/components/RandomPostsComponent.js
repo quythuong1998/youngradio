@@ -4,6 +4,7 @@ import React from 'react';
 // import { createStructuredSelector } from 'reselect';
 
 // import {} from '../store/CategoryState';
+import CardWithTopImageComponent from './CardWithTopImageComponent';
 
 // const connectToRedux = connect(
 //   createStructuredSelector(
@@ -17,6 +18,29 @@ import React from 'react';
 //     })
 //   )
 // );
+const mockBlogPosts = [
+  {
+    category: 'đời sống',
+    title: 'Cuộc đời có thật sự bất công với bạn?',
+    description:
+      'Tôi năm nay 30, sống ngót nghét cũng được nửa cuộc đời rồi chứ gì nữa, vậy mà chẳng có gì ra hồn cả. Người ta vẫn nói "chênh vênh tuổi 30", nghe nó thật buồn cười  nhỉ, đáng lẽ ra con người ta, tuổi 30 là tuổi ổn định, không công việc ổn định thì cũng có một gia đình nhỏ để sớm tối quay quần rồi. ',
+    image: '/static/material/assets/img/examples/office2.jpg'
+  },
+  {
+    category: 'đời sống',
+    title: 'Cuộc đời có thật sự bất công với bạn?',
+    description:
+      'Tôi năm nay 30, sống ngót nghét cũng được nửa cuộc đời rồi chứ gì nữa, vậy mà chẳng có gì ra hồn cả. Người ta vẫn nói "chênh vênh tuổi 30", nghe nó thật buồn cười  nhỉ, đáng lẽ ra con người ta, tuổi 30 là tuổi ổn định, không công việc ổn định thì cũng có một gia đình nhỏ để sớm tối quay quần rồi. ',
+    image: '/static/material/assets/img/examples/office2.jpg'
+  },
+  {
+    category: 'đời sống',
+    title: 'Cuộc đời có thật sự bất công với bạn?',
+    description:
+      'Tôi năm nay 30, sống ngót nghét cũng được nửa cuộc đời rồi chứ gì nữa, vậy mà chẳng có gì ra hồn cả. Người ta vẫn nói "chênh vênh tuổi 30", nghe nó thật buồn cười  nhỉ, đáng lẽ ra con người ta, tuổi 30 là tuổi ổn định, không công việc ổn định thì cũng có một gia đình nhỏ để sớm tối quay quần rồi. ',
+    image: '/static/material/assets/img/examples/office2.jpg'
+  }
+];
 
 class RandomPostsComponent extends React.Component {
   //   componentWillMount() {
@@ -25,7 +49,7 @@ class RandomPostsComponent extends React.Component {
   render() {
     return (
       <div className="section">
-        <h3 className="title text-center">You may also be interested in</h3>
+        <h2 className="title text-center">You may also be interested in</h2>
         <ul className="nav nav-pills nav-pills-primary justify-content-center">
           <li className="nav-item">
             <a className="nav-link active" href="#pill1" data-toggle="tab">
@@ -72,89 +96,15 @@ class RandomPostsComponent extends React.Component {
             </div> */}
 
         <div className="row">
-          <div className="col-md-4">
-            <div className="card card-plain card-blog">
-              <div className="card-header card-header-image">
-                <a href="#pablo">
-                  <img
-                    className="img img-raised"
-                    src="/static/material/assets/img/bg5.jpg"
-                    alt="mock-img"
-                  />
-                </a>
-              </div>
-              <div className="card-body">
-                <h6 className="card-category text-info">Enterprise</h6>
-                <h4 className="card-title">
-                  <a href="#pablo">
-                    Autodesk looks to future of 3D printing with Project Escher
-                  </a>
-                </h4>
-                <p className="card-description">
-                  Like so many organizations these days, Autodesk is a company
-                  in transition. It was until recently a traditional boxed
-                  software company selling licenses.
-                  <a href="#pablo"> Read More </a>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="card card-plain card-blog">
-              <div className="card-header card-header-image">
-                <a href="#pablo">
-                  <img
-                    className="img img-raised"
-                    src="/static/material/assets/img/examples/blog5.jpg"
-                    alt="mock-img"
-                  />
-                </a>
-              </div>
-              <div className="card-body">
-                <h6 className="card-category text-success">Startups</h6>
-                <h4 className="card-title">
-                  <a href="#pablo">
-                    Lyft launching cross-platform service this week
-                  </a>
-                </h4>
-                <p className="card-description">
-                  Like so many organizations these days, Autodesk is a company
-                  in transition. It was until recently a traditional boxed
-                  software company selling licenses.
-                  <a href="#pablo"> Read More </a>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="card card-plain card-blog">
-              <div className="card-header card-header-image">
-                <a href="#pablo">
-                  <img
-                    className="img img-raised"
-                    src="/static/material/assets/img/examples/blog6.jpg"
-                    alt="mock-img"
-                  />
-                </a>
-              </div>
-              <div className="card-body">
-                <h6 className="card-category text-danger">
-                  <i className="material-icons">trending_up</i> Enterprise
-                </h6>
-                <h4 className="card-title">
-                  <a href="#pablo">
-                    6 insights into the French Fashion landscape
-                  </a>
-                </h4>
-                <p className="card-description">
-                  Like so many organizations these days, Autodesk is a company
-                  in transition. It was until recently a traditional boxed
-                  software company selling licenses.
-                  <a href="#pablo"> Read More </a>
-                </p>
-              </div>
-            </div>
-          </div>
+          {mockBlogPosts.map((item, index) => (
+            <CardWithTopImageComponent
+              category={item.category}
+              title={item.title}
+              description={item.description}
+              image={item.image}
+              key={index}
+            />
+          ))}
         </div>
       </div>
     );
