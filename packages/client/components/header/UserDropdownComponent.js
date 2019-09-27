@@ -21,21 +21,40 @@ const connectToRedux = connect(
 );
 
 class UserDropdownComponent extends React.Component {
-  componentDidMount() {
-    this.props.GetCurrentUser();
-  }
-
   render() {
     const { user, logout } = this.props;
 
     return (
-      <li className="dropdown nav-item">
-        <a href="#" className="dropdown-toggle nav-link" data-toggle="dropdown">
-          {user.fullName}
+      <li className="dropdown nav-item ml-2">
+        <a
+          href="#pablo"
+          className="profile-photo dropdown-toggle nav-link"
+          data-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {user && (
+            <div className="profile-photo-small">
+              <img
+                src={user.avatar}
+                alt="circleImage"
+                className="rounded-circle img-fluid"
+              />
+            </div>
+          )}
+
+          <div className="ripple-container"></div>
         </a>
-        <div className="dropdown-menu dropdown-with-icons">
-          <a href="#" onClick={logout} className="dropdown-item">
-            Logout
+        <div className="dropdown-menu dropdown-menu-right">
+          <h6 className="dropdown-header">Hi, {user && user.fullName}</h6>
+          <a href="#pablo" className="dropdown-item">
+            <i className="material-icons mr-2">face</i> Your page
+          </a>
+          <a href="#pablo" className="dropdown-item">
+            <i className="material-icons mr-2">settings</i> Settings and other
+            stuff
+          </a>
+          <a href="#pablo" className="dropdown-item" onClick={logout}>
+            <i className="material-icons mr-2">fingerprint</i> Sign out
           </a>
         </div>
       </li>
