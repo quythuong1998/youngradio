@@ -1,10 +1,10 @@
 import { makeFetchAction } from 'redux-api-call';
 import { respondToSuccess } from '../middlewares/api-reaction';
 import { flow, path } from 'lodash/fp';
-import { gql } from '../libs';
+import { gql } from '../libs/graphql';
 // import { createErrorSelector } from './AdminState';
 
-const GET_ALL_CATEGORY_API = 'GetAllCategoryAPI';
+export const GET_ALL_CATEGORY_API = 'GetAllCategoryAPI';
 
 const GetAllCategoryAPI = makeFetchAction(
   GET_ALL_CATEGORY_API,
@@ -18,7 +18,7 @@ const GetAllCategoryAPI = makeFetchAction(
 );
 
 export const getAllCategory = () => {
-  return respondToSuccess(GetAllCategoryAPI.actionCreator(), resp => {
+  return respondToSuccess(GetAllCategoryAPI.actionCreator({}), resp => {
     if (resp.errors) {
       console.error('Err:', resp.errors);
       return;
