@@ -12,6 +12,7 @@ const GetAllCategoryAPI = makeFetchAction(
     query {
       get_all_category {
         name
+        id
       }
     }
   `

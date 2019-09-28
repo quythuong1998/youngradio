@@ -26,8 +26,7 @@ const ArticleSchema = Schema({
   },
   view: {
     type: Number,
-    default: 0,
-    required: true
+    default: 0
   },
   hastags: [String],
   created_at: {
@@ -40,18 +39,7 @@ const ArticleSchema = Schema({
     default: Date.now,
     required: true
   },
-  image_description: {
-    type: String,
-    required: true
-  },
-  first_name: {
-    type: String,
-    required: true
-  },
-  last_name: {
-    type: String,
-    required: true
-  },
+  image_description: String,
   category_id: {
     type: String,
     required: true
