@@ -1,6 +1,6 @@
 import { path } from 'lodash/fp';
 import { MALE, FEMALE } from '../../../enums/userGender';
-import { AUTHOR, ADMIN } from '../../../enums/userRole';
+import { USER, ADMIN } from '../../../enums/userRole';
 import {
   USER_PENDING,
   USER_ACTIVE,
@@ -22,7 +22,7 @@ module.exports = {
 
   Role: {
     ADMIN,
-    AUTHOR
+    USER
   },
 
   User: {
