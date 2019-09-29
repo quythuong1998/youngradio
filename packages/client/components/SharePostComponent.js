@@ -9,6 +9,7 @@ import {
   createArticleErrorMessageSelector,
   resetDataCreateArticle
 } from '../stores/ArticleState';
+import { getCurrentUserDataSelector } from '../stores/UserState';
 import PostSuccessComponent from './PostSuccessComponent';
 import RenderEditorFieldComponent from './FormField/RenderEditorFieldComponent';
 import RenderInputFieldComponent from '../components/FormField/RenderInputFieldComponent';
@@ -23,7 +24,8 @@ import { required } from '../utils/validation';
 const connectToRedux = connect(
   createStructuredSelector({
     errorMessage: createArticleErrorMessageSelector,
-    successMessage: createArticleDataSelector
+    successMessage: createArticleDataSelector,
+    currentUser: getCurrentUserDataSelector
   }),
   dispatch => ({
     onSubmit: ({
@@ -68,7 +70,8 @@ class SharePostComponent extends React.Component {
       submitting,
       reset,
       errorMessage,
-      successMessage
+      successMessage,
+      currentUser
     } = this.props;
 
     return (
@@ -85,7 +88,7 @@ class SharePostComponent extends React.Component {
                 <div className="col-md-12 col-sm-12">
                   <h2 className="title text-center"> Share your article </h2>
                   {successMessage ? (
-                    <PostSuccessComponent />
+                    <PostSuccessComponent userRole={currentUser.role} />
                   ) : (
                     <div className="form-group has-default bmd-form-group">
                       <form onSubmit={handleSubmit}>

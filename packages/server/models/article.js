@@ -43,6 +43,11 @@ const ArticleSchema = Schema({
   category_id: {
     type: String,
     required: true
+  },
+  is_verified: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 });
 

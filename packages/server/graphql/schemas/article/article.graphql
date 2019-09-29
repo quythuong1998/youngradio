@@ -10,6 +10,7 @@ type Article {
   view: String!
   description: String!
   imageDescription: String
+  isVerified: Boolean!
 }
 
 type Query {
