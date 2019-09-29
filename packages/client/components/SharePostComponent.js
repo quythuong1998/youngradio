@@ -18,7 +18,6 @@ import RenderTextAreaFieldComponent from './FormField/RenderTextAreaFieldCompone
 import RenderSelectedImageFieldComponent from './FormField/RenderSelectedImageFieldComponent';
 import RenderTagInputFieldComponent from './FormField/RenderTagInputFieldComponent';
 import ErrorMessageComponent from './ErrorMessageComponent';
-
 import { required } from '../utils/validation';
 
 const connectToRedux = connect(
@@ -129,35 +128,10 @@ class SharePostComponent extends React.Component {
                             <h4>Article descriptons</h4>
                           </div>
                           <div className="col-md-5 col-sm-8">
-                            {/* <div
-                        className="fileinput fileinput-new text-center"
-                        data-provides="fileinput"
-                      >
-                        <div className="fileinput-new thumbnail img-raised">
-                          <img
-                            src="/static/material/assets/img/image_placeholder.jpg"
-                            alt="..."
-                          />
-                        </div>
-                        <div className="fileinput-preview fileinput-exists thumbnail img-raised"></div>
-                        <div>
-                          <span className="btn btn-raised btn-round btn-default btn-file">
-                            <span className="fileinput-new">Select image</span>
-                            <span className="fileinput-exists">Change</span>
-                            <input type="file" name="..." />
-                          </span>
-                          <a
-                            href="#pablo"
-                            className="btn btn-danger btn-round fileinput-exists"
-                            data-dismiss="fileinput"
-                          >
-                            <i className="fa fa-times"></i> Remove
-                          </a>
-                        </div>
-                      </div>*/}
                             <Field
                               name="imageDescription"
                               component={RenderSelectedImageFieldComponent}
+                              type="file"
                             />
                           </div>
                           <div className="col-md-7 col-sm-8">

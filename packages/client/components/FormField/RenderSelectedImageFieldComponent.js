@@ -1,80 +1,49 @@
 import React from 'react';
 
-const RenderSelectedImageFieldComponent = ({
-  input: { onChange },
-  meta: { touched, error }
-}) => (
-  <React.Fragment>
-    <div
-      className="fileinput fileinput-new text-center"
-      data-provides="fileinput"
-    >
-      <div className="fileinput-new thumbnail img-raised">
-        <img
-          src="/static/material/assets/img/image_placeholder.jpg"
-          alt="..."
-        />
-      </div>
-      <div className="fileinput-preview fileinput-exists thumbnail img-raised"></div>
-      <div>
-        <span className="btn btn-raised btn-round btn-default btn-file">
-          <span className="fileinput-new">Select image</span>
-          <span className="fileinput-exists">Change</span>
-          <input type="file" name="..." onChange={onChange} />
-        </span>
-        <a
-          href="#pablo"
-          className="btn btn-danger btn-round fileinput-exists"
-          data-dismiss="fileinput"
-        >
-          <i className="fa fa-times"></i> Remove
-        </a>
-      </div>
-    </div>
+class RenderSelectedImageFieldComponent extends React.Component {
+  //review it later
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);
+  }
 
-    {touched && (error && <span style={{ color: 'red' }}>{error}</span>)}
-  </React.Fragment>
-);
+  onChange(e) {
+    const {
+      input: { onChange }
+    } = this.props;
+    e.preventDefault();
+    let file = e.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      onChange(reader.result);
+    };
+  }
+
+  render() {
+    const {
+      input: { value }
+    } = this.props;
+
+    return (
+      <React.Fragment>
+        <div className="fileinput fileinput-new text-center">
+          <div className="fileinput-new thumbnail img-raised">
+            <img
+              src={value || '/static/images/image_placeholder.jpg'}
+              alt="..."
+            />
+          </div>
+          <span className="btn btn-raised btn-round btn-default btn-file">
+            <div className="d-flex justify-content-center">
+              <span className="fileinput-new">Select image</span>
+            </div>
+            <input type="file" onChange={this.onChange} />
+          </span>
+        </div>
+      </React.Fragment>
+    );
+  }
+}
 
 export default RenderSelectedImageFieldComponent;
-
-// import React, { Component } from 'react';
-
-// export default class RenderSelectedImageFieldComponent extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.onChange = this.onChange.bind(this);
-//   }
-
-//   onChange(e) {
-//     const {
-//       input: { onChange }
-//     } = this.props;
-//     onChange(e.target.files[0]);
-//   }
-
-//   render() {
-//     const {
-//       input: { value }
-//     } = this.props;
-//     const { input, label, required, meta } = this.props; //whatever props you send to the component from redux-form Field
-//     return (
-//       <div>
-//         <label>{label}</label>
-//         <div className="fileinput-new thumbnail img-raised">
-//           <img
-//             src="/static/material/assets/img/image_placeholder.jpg"
-//             alt="..."
-//           />
-//         </div>
-//         <div>
-//           <input
-//             type="file"
-//             accept=".jpg, .png, .jpeg"
-//             onChange={this.onChange}
-//           />
-//         </div>
-//       </div>
-//     );
-//   }
-// }
