@@ -14,7 +14,8 @@ const authorUser = {
   birth_date: '19/10/1998',
   quote: 'Death is like a wind, always by my side.',
   status: USER_ACTIVE,
-  role: AUTHOR
+  role: AUTHOR,
+  profession: 'Student'
 };
 
 const systemUser = {
@@ -27,7 +28,8 @@ const systemUser = {
   birth_date: '19/10/1998',
   quote: 'Death is like a wind, always by my side.',
   status: USER_ACTIVE,
-  role: ADMIN
+  role: ADMIN,
+  profession: 'Student'
 };
 
 const insertSystemUser = () => new Users(systemUser).save();

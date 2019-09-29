@@ -4,6 +4,7 @@ import { flow, path, map, join } from 'lodash/fp';
 import { gql } from '../libs/graphql';
 
 export const CREATE_ARTICLE_API = 'CreateArticleAPI';
+export const GET_USER_ARTICLES_API = 'GetUserArticlesAPI';
 
 const CreateArticleAPI = makeFetchAction(
   CREATE_ARTICLE_API,
@@ -72,5 +73,34 @@ export const createArticleErrorMessageSelector = flow(
 export const resetDataCreateArticle = dispatch => {
   dispatch(CreateArticleAPI.resetter(['data', 'error']));
 };
+
+const GetUserArticlesAPI = makeFetchAction(
+  GET_USER_ARTICLES_API,
+  gql`
+    query {
+      get_user_articles {
+        description
+        imageDescription
+        title
+        category
+      }
+    }
+  `
+);
+
+export const getUserArticles = () => {
+  return respondToSuccess(GetUserArticlesAPI.actionCreator({}), resp => {
+    if (resp.errors) {
+      console.error('Err:', resp.errors);
+      return;
+    }
+    return;
+  });
+};
+
+export const getUserArticlesDataSelector = flow(
+  GetUserArticlesAPI.dataSelector,
+  path('data.get_user_articles')
+);
 
 export default {};

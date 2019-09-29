@@ -62,6 +62,8 @@ const GetCurrentUserAPI = makeFetchAction(
         birthDate
         avatar
         role
+        profession
+        quote
       }
     }
   `

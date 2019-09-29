@@ -11,10 +11,12 @@ type Article {
   description: String!
   imageDescription: String
   isVerified: Boolean!
+  category: String!
 }
 
 type Query {
   get_most_view_articles(amount: Int!): [Article!]!
+  get_user_articles: [Article!]!
 }
 
 type Mutation {

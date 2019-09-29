@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-
+import Link from 'next/link';
 import {
   getCurrentUserDataSelector,
   getCurrentUser,
@@ -46,9 +46,12 @@ class UserDropdownComponent extends React.Component {
         </a>
         <div className="dropdown-menu dropdown-menu-right">
           <h6 className="dropdown-header">Hi, {user && user.fullName}</h6>
-          <a href="#pablo" className="dropdown-item">
-            <i className="material-icons mr-2">face</i> Your page
-          </a>
+          <Link href="/user">
+            <a href="#" className="dropdown-item">
+              <i className="material-icons mr-2">face</i> Your page
+            </a>
+          </Link>
+
           <a href="#pablo" className="dropdown-item">
             <i className="material-icons mr-2">settings</i> Settings and other
             stuff

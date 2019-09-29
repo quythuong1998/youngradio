@@ -15,6 +15,7 @@ type User {
   status: UserStatus!
   role: Role!
   avatar: String!
+  profession: String!
 }
 
 type Query {
