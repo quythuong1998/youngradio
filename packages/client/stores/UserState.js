@@ -1,8 +1,11 @@
 import { makeFetchAction, ACTIONS } from 'redux-api-call';
 import { respondToSuccess } from '../middlewares/api-reaction';
 import Router from 'next/router';
-import { flow, includes, join, map, path, get, brn, tap, has } from 'lodash/fp';
-import { gql, saveToken, nfetch, removeToken } from '../libs';
+import { flow, join, map, path, get, has } from 'lodash/fp';
+
+import { gql } from '../libs/graphql';
+import { saveToken, removeToken } from '../libs/token-libs';
+import nfetch from '../libs/nfetch';
 
 const USER_LOGIN_API = 'UserLoginAPI';
 const GET_CURRENT_USER_API = 'GetCurrentUserAPI';
@@ -76,10 +79,14 @@ export const getCurrentUser = () =>
   respondToSuccess(GetCurrentUserAPI.actionCreator({}), resp => {
     if (resp.errors) {
       console.error(resp.errors);
-      return Router.replace('/login');
+      return Router.replace({
+        pathname: '/login'
+      });
     }
     if (!verifyScopeAndRole(resp.data.get_current_user)) {
-      return Router.replace('/login');
+      return Router.replace({
+        pathname: '/login'
+      });
     }
   });
 

@@ -1,10 +1,9 @@
 import React from 'react';
 
 import HeaderTitleComponent from './HeaderTitleComponent';
-import IndexDescriptionsComponent from './IndexDescriptionsComponent';
 import HeaderInfoComponent from './HeaderInfoComponent';
 
-const HeaderComponent = () => (
+const HeaderComponent = ({ ...props }) => (
   <React.Fragment>
     <nav
       className="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg"
@@ -27,10 +26,9 @@ const HeaderComponent = () => (
             <span className="navbar-toggler-icon"></span>
           </button>
         </div>
-        <HeaderInfoComponent />
+        <HeaderInfoComponent {...props} />
       </div>
     </nav>
-    <IndexDescriptionsComponent />
   </React.Fragment>
 );
 

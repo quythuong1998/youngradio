@@ -46,6 +46,10 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
           <link
+            href="/static/material/assets/css/custom.css"
+            rel="stylesheet"
+          />
+          <link
             rel="stylesheet"
             type="text/css"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"

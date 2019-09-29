@@ -1,5 +1,5 @@
 import React from 'react';
-import HomePageLayout from '../layouts/HomePageLayout';
+import EmptyPageLayout from '../layouts/EmptyPageLayout';
 import PageNotFoundComponent from '../components/PageNotFoundComponent';
 
 class Error extends React.Component {
@@ -11,9 +11,9 @@ class Error extends React.Component {
     return (
       <React.Fragment>
         {this.props.statusCode === 404 && (
-          <HomePageLayout>
+          <EmptyPageLayout>
             <PageNotFoundComponent />
-          </HomePageLayout>
+          </EmptyPageLayout>
         )}
       </React.Fragment>
     );

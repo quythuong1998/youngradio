@@ -36,5 +36,5 @@ enum Gender {
 
 enum Role {
   ADMIN
-  AUTHOR
+  USER
 }

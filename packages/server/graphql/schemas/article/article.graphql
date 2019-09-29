@@ -3,16 +3,27 @@ type Article {
   title: String!
   content: String!
   authorId: String!
-  firstName: String!
-  lastName: String!
   categoryId: String!
   hastags: [String]
   createdAt: String!
   updatedAt: String!
   view: String!
-  imageDescription: String! 
+  description: String!
+  imageDescription: String
+  isVerified: Boolean!
 }
 
 type Query {
   get_most_view_articles(amount: Int!): [Article!]!
+}
+
+type Mutation {
+  create_article(
+    title: String
+    content: String
+    categoryId: String
+    hastags: [String]
+    description: String
+    imageDescription: String
+  ): Article!
 }
