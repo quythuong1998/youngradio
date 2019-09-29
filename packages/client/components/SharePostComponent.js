@@ -96,23 +96,15 @@ class SharePostComponent extends React.Component {
                             <h4>Article information</h4>
                           </div>
                           <div className="col-lg-6 col-sm-12">
-                            <div className="form-group bmd-form-group">
-                              <div className="input-group">
-                                <div className="input-group-prepend">
-                                  <span className="input-group-text">
-                                    <i className="material-icons">title</i>
-                                  </span>
-                                </div>
-                                <Field
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="Title"
-                                  name="title"
-                                  component={RenderInputFieldComponent}
-                                  validate={[required]}
-                                />
-                              </div>
-                            </div>
+                            <Field
+                              type="text"
+                              className="form-control"
+                              placeholder="Title"
+                              name="title"
+                              component={RenderInputFieldComponent}
+                              validate={[required]}
+                              icon="title"
+                            />
                           </div>
                           <div className="col-lg-6 col-sm-12">
                             <Field

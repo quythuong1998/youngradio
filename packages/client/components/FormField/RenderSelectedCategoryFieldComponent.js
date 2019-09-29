@@ -31,17 +31,14 @@ class RenderSelectedCategoryComponent extends React.Component {
     const { categories } = this.props;
 
     return (
-      <React.Fragment>
+      <div className="mt-2">
         <select
           {...input}
-          className="selectpicker"
+          className="selectpicker w-100"
           data-style="select-with-transition"
           data-size="12"
           title="Select Category"
         >
-          <option hidden disabled value="">
-            ---
-          </option>
           {categories &&
             categories.map((item, index) => (
               <option key={index} value={item.id}>
@@ -50,7 +47,7 @@ class RenderSelectedCategoryComponent extends React.Component {
             ))}
         </select>
         {touched && (error && <span style={{ color: 'red' }}>{error}</span>)}
-      </React.Fragment>
+      </div>
     );
   }
 }

@@ -13,7 +13,9 @@ const RenderTextAreaFieldComponent = ({
       placeholder={placeholder}
       rows={rows}
     ></textarea>
-    {touched && (error && <span style={{ color: 'red' }}>{error}</span>)}
+    <div className="text-danger text-center">
+      {touched && (error && <span style={{ color: 'red' }}>{error}</span>)}
+    </div>
   </React.Fragment>
 );
 
