@@ -43,6 +43,7 @@ const UserSchema = Schema({
     default: Date.now,
     required: true
   },
+  profession: String,
   avatar: {
     type: String,
     default: `data:image/jpeg;base64,/9j/4Qc3RXhpZgAATU0AKgAAAAgADAEAAAMAAAABAMgAAAEBAAMAAAABAMgAAAECAAMAAAADAAAAngEGAAMAAAABAAIA

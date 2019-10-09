@@ -19,7 +19,7 @@ module.exports = {
           category_id: categoryId,
           hastags,
           description,
-          imageDescription,
+          image_description: imageDescription,
           author_id: currentUser.id,
           is_verified: articleStatus
         });
