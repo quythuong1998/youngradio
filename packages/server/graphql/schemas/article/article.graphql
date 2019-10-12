@@ -12,11 +12,14 @@ type Article {
   imageDescription: String
   isVerified: Boolean!
   category: String!
+  authorName: String!
+  authorAvatar: String!
 }
 
 type Query {
   get_most_view_articles(amount: Int!): [Article!]!
   get_user_articles: [Article!]!
+  get_lasted_articles(amount: Int!): [Article!]!
 }
 
 type Mutation {

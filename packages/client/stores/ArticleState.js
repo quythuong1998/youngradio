@@ -5,6 +5,76 @@ import { gql } from '../libs/graphql';
 
 export const CREATE_ARTICLE_API = 'CreateArticleAPI';
 export const GET_USER_ARTICLES_API = 'GetUserArticlesAPI';
+export const GET_MOST_VIEW_ARTICLES_API = 'GetMostViewArticlesAPI';
+export const GET_LASTED_ARTICLES_API = 'GetLastedArticlesAPI';
+
+const GetLastedArticlesAPI = makeFetchAction(
+  GET_MOST_VIEW_ARTICLES_API,
+  gql`
+    query($amount: Int!) {
+      get_lasted_articles(amount: $amount) {
+        description
+        imageDescription
+        title
+        category
+        authorName
+        authorAvatar
+        authorId
+        createdAt
+      }
+    }
+  `
+);
+
+export const getLastedArticles = amount => {
+  return respondToSuccess(
+    GetLastedArticlesAPI.actionCreator({ amount }),
+    resp => {
+      if (resp.errors) {
+        console.error('Err:', resp.errors);
+        return;
+      }
+      return;
+    }
+  );
+};
+
+export const lastedArticlesDataSelector = flow(
+  GetLastedArticlesAPI.dataSelector,
+  path('data.get_lasted_articles')
+);
+
+const GetMostViewArticlesAPI = makeFetchAction(
+  GET_MOST_VIEW_ARTICLES_API,
+  gql`
+    query($amount: Int!) {
+      get_most_view_articles(amount: $amount) {
+        description
+        imageDescription
+        title
+        category
+      }
+    }
+  `
+);
+
+export const getMostViewArticles = amount => {
+  return respondToSuccess(
+    GetMostViewArticlesAPI.actionCreator({ amount }),
+    resp => {
+      if (resp.errors) {
+        console.error('Err:', resp.errors);
+        return;
+      }
+      return;
+    }
+  );
+};
+
+export const mostViewArticlesDataSelector = flow(
+  GetMostViewArticlesAPI.dataSelector,
+  path('data.get_most_view_articles')
+);
 
 const CreateArticleAPI = makeFetchAction(
   CREATE_ARTICLE_API,

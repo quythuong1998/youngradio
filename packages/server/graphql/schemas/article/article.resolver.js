@@ -1,5 +1,5 @@
 import { path } from 'lodash/fp';
-import { Categories } from '../../../services';
+import { Categories, Users } from '../../../services';
 module.exports = {
   Article: {
     createdAt: path('created_at'),
@@ -11,6 +11,14 @@ module.exports = {
     category: async article => {
       const category = await Categories.find({ id: article.category_id });
       return category[0].name;
+    },
+    authorName: async article => {
+      const author = await Users.findOne({ id: article.author_id });
+      return author.first_name + ' ' + author.last_name;
+    },
+    authorAvatar: async article => {
+      const author = await Users.findOne({ id: article.author_id });
+      return author.avatar;
     }
   }
 };

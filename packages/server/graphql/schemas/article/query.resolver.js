@@ -16,6 +16,10 @@ module.exports = {
           sortDefaultOptions
         );
       }
-    )
+    ),
+    get_lasted_articles: async (_, { amount }) => {
+      const articles = await Articles.find({}).sort([['created_at', -1]]);
+      return articles.slice(0, amount);
+    }
   }
 };

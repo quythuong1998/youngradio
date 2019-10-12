@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Link from 'next/link';
 const CardWithSideImageComponent = ({
   category,
   title,
@@ -7,69 +7,38 @@ const CardWithSideImageComponent = ({
   author,
   time,
   image,
-  imageLeft = true
+  authorAvatar,
+  authorId
 }) => (
-  <React.Fragment>
-    {imageLeft === true ? (
-      <div className="card card-plain card-blog">
-        <div className="row">
-          <div className="col-md-5 d-flex align-items-center">
-            <div className="card-header card-header-image">
-              <a href="#pablito">
-                <img className="img" src={image} alt="mock-img" />
-              </a>
-            </div>
-          </div>
-          <div className="col-md-7">
-            <h6 className="card-category text-info">{category}</h6>
-            <h3 className="card-title">
-              <a href="#pablo">{title}</a>
-            </h3>
-            <p className="card-description">
-              {description}
-              <a href="#pablo"> Read More </a>
-            </p>
-            <p className="author">
-              by
-              <a href="#pablo">
-                <b> {author}</b>
-              </a>
-              , {time}
-            </p>
-          </div>
+  <div className="col-lg-4 col-md-6">
+    <div className="card card-blog">
+      <div className="card-header card-header-image">
+        <a href="#pablo">
+          <img className="img" alt="img" src={image} />
+        </a>
+      </div>
+      <div className="card-body ">
+        <h6 className="card-category text-success">{category}</h6>
+        <h4 className="card-title">
+          <a href="#pablo">{title}</a>
+        </h4>
+        <p className="card-description">{description}</p>
+      </div>
+      <div className="card-footer ">
+        <div className="author">
+          <Link href={'/user?id=' + authorId}>
+            <a>
+              <img src={authorAvatar} alt="..." className="avatar img-raised" />
+              <span>{author}</span>
+            </a>
+          </Link>
+        </div>
+        <div className="stats ml-auto">
+          <i className="material-icons">schedule</i> {time}
         </div>
       </div>
-    ) : (
-      <div className="card card-plain card-blog">
-        <div className="row">
-          <div className="col-md-7">
-            <h6 className="card-category text-info">{category}</h6>
-            <h3 className="card-title">
-              <a href="#pablo">{title}</a>
-            </h3>
-            <p className="card-description">
-              {description}
-              <a href="#pablo"> Read More </a>
-            </p>
-            <p className="author">
-              by
-              <a href="#pablo">
-                <b> {author}</b>
-              </a>
-              , {time}
-            </p>
-          </div>
-          <div className="col-md-5 d-flex align-items-center">
-            <div className="card-header card-header-image">
-              <a href="#pablito">
-                <img className="img" src={image} alt="mock-img" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    )}
-  </React.Fragment>
+    </div>
+  </div>
 );
 
 export default CardWithSideImageComponent;
