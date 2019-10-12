@@ -5,6 +5,151 @@ import { gql } from '../libs/graphql';
 
 export const CREATE_ARTICLE_API = 'CreateArticleAPI';
 export const GET_USER_ARTICLES_API = 'GetUserArticlesAPI';
+export const DELETE_ARTICLE_API = 'DeleteArticleAPI';
+export const GET_ARTICLE = 'GetArticle';
+export const EDIT_ARTICLE = 'EditArticle';
+
+export const EditArticleAPI = makeFetchAction(
+  EDIT_ARTICLE,
+  gql`
+    mutation(
+      $title: String!
+      $content: String!
+      $categoryId: String!
+      $hastags: [String]
+      $description: String!
+      $imageDescription: String
+      $id: String!
+    ) {
+      edit_article(
+        title: $title
+        content: $content
+        categoryId: $categoryId
+        hastags: $hastags
+        description: $description
+        imageDescription: $imageDescription
+        id: $id
+      ) {
+        id
+      }
+    }
+  `
+);
+
+export const editArticle = ({
+  id,
+  title,
+  description,
+  content,
+  categoryId,
+  hastags,
+  imageDescription
+}) => {
+  return respondToSuccess(
+    EditArticleAPI.actionCreator({
+      id,
+      title,
+      content,
+      description,
+      categoryId,
+      hastags,
+      imageDescription
+    }),
+    resp => {
+      if (resp.errors) {
+        console.error('Err:', resp.errors);
+        return;
+      }
+      return;
+    }
+  );
+};
+
+export const editArticleDataSelector = flow(
+  EditArticleAPI.dataSelector,
+  path('data.edit_article')
+);
+
+export const editArticleErrorMessageSelector = flow(
+  EditArticleAPI.dataSelector,
+  path('errors'),
+  map('message'),
+  join(' | ')
+);
+
+export const resetDataEditArticle = dispatch => {
+  dispatch(EditArticleAPI.resetter(['data', 'error']));
+};
+
+const GetArticleAPI = makeFetchAction(
+  GET_ARTICLE,
+  gql`
+    query($id: String!) {
+      get_article(id: $id) {
+        title
+        description
+        content
+        categoryId
+        hastags
+        imageDescription
+      }
+    }
+  `
+);
+
+export const getArticle = id =>
+  respondToSuccess(GetArticleAPI.actionCreator({ id }), resp => {
+    if (resp.errors) {
+      console.error('Err:', resp.errors);
+      return;
+    }
+    return;
+  });
+
+export const getArticleDataSelector = flow(
+  GetArticleAPI.dataSelector,
+  path('data.get_article')
+);
+
+const DeleteArticleAPI = makeFetchAction(
+  DELETE_ARTICLE_API,
+  gql`
+    mutation($id: String!) {
+      delete_article(id: $id) {
+        id
+      }
+    }
+  `
+);
+
+export const deleteArticle = id => {
+  return respondToSuccess(
+    DeleteArticleAPI.actionCreator({
+      id
+    }),
+    (resp, headers, store) => {
+      if (resp.errors) {
+        console.error('Err:', resp.errors);
+        return;
+      }
+
+      store.dispatch(getUserArticles());
+      return;
+    }
+  );
+};
+
+// export const createArticleDataSelector = flow(
+//   CreateArticleAPI.dataSelector,
+//   path('data.create_article')
+// );
+
+// export const createArticleErrorMessageSelector = flow(
+//   CreateArticleAPI.dataSelector,
+//   path('errors'),
+//   map('message'),
+//   join(' | ')
+// );
 
 const CreateArticleAPI = makeFetchAction(
   CREATE_ARTICLE_API,
@@ -83,6 +228,7 @@ const GetUserArticlesAPI = makeFetchAction(
         imageDescription
         title
         category
+        id
       }
     }
   `

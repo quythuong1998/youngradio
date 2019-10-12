@@ -16,6 +16,9 @@ module.exports = {
           sortDefaultOptions
         );
       }
-    )
+    ),
+    get_article: async (_, { id }) => {
+      return Articles.findOne({ id });
+    }
   }
 };
