@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+
 import UserCardBlogComponent from './UserCardBlogComponent';
+
 import {
   getCurrentUser,
   getCurrentUserDataSelector
@@ -9,7 +11,8 @@ import {
 
 import {
   getUserArticles,
-  getUserArticlesDataSelector
+  getUserArticlesDataSelector,
+  deleteArticle
 } from '../stores/ArticleState';
 
 const connectToRedux = connect(
@@ -23,6 +26,9 @@ const connectToRedux = connect(
     },
     GetAllArticle: () => {
       dispatch(getUserArticles());
+    },
+    DeleteArticle: id => {
+      dispatch(deleteArticle(id));
     }
   })
 );
@@ -34,7 +40,7 @@ class UserPageComponent extends React.Component {
   }
 
   render() {
-    const { currentUser, articles = [] } = this.props;
+    const { currentUser, articles, DeleteArticle } = this.props;
     return (
       <div className="profile-page sidebar-collapse">
         <div
@@ -57,29 +63,8 @@ class UserPageComponent extends React.Component {
                       )}
                     </div>
                     <div className="name">
-                      {console.log(currentUser)}
                       <h3 className="title">{currentUser.fullName}</h3>
                       <h6>{currentUser.profession}</h6>
-
-                      {/* social Network: DO LATER */}
-                      {/* <a
-                        href="#pablo"
-                        className="btn btn-just-icon btn-link btn-dribbble"
-                      >
-                        <i className="fa fa-dribbble"></i>
-                      </a>
-                      <a
-                        href="#pablo"
-                        className="btn btn-just-icon btn-link btn-twitter"
-                      >
-                        <i className="fa fa-twitter"></i>
-                      </a>
-                      <a
-                        href="#pablo"
-                        className="btn btn-just-icon btn-link btn-pinterest"
-                      >
-                        <i className="fa fa-pinterest"></i>
-                      </a> */}
                     </div>
                   </div>
                 </div>
@@ -96,14 +81,29 @@ class UserPageComponent extends React.Component {
                 <div className="cards">
                   <div className="container">
                     <div className="row">
-                      {articles &&
-                        articles.map(item => (
+                      {articles && articles.length ? (
+                        articles.map((item, index) => (
                           <UserCardBlogComponent
                             title={item.title}
                             category={item.category}
                             image={item.imageDescription}
+                            key={index}
+                            actionDelete={() => DeleteArticle(item.id)}
+                            idArticle={item.id}
                           />
-                        ))}
+                        ))
+                      ) : (
+                        <div className="d-flex justify-content-center">
+                          <div className="col-lg-6">
+                            <img
+                              src="/static/images/empty.png"
+                              className="rounded"
+                              alt="notify"
+                              width="100%"
+                            />
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
