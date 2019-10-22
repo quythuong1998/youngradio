@@ -31,12 +31,12 @@ class RenderSelectedCategoryComponent extends React.Component {
     const { categories } = this.props;
 
     return (
-      <div className="mt-2">
+      <div className="">
         <select
           {...input}
-          className="selectpicker w-100"
-          data-style="select-with-transition"
-          data-size="12"
+          className=" w-100"
+          // data-style="select-with-transition"
+          // data-size="12"
           title="Select Category"
         >
           {categories &&

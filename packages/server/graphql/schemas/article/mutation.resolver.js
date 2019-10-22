@@ -29,6 +29,45 @@ module.exports = {
         await article.save();
         return article;
       }
+    ),
+    delete_article: combineResolvers(checkAuthentication, async (_, { id }) => {
+      const article = await Articles.findOne({ id });
+      article.remove();
+      return article;
+    }),
+    edit_article: combineResolvers(
+      checkAuthentication,
+      async (
+        _,
+        {
+          id,
+          title,
+          content,
+          categoryId,
+          hastags,
+          description,
+          imageDescription
+        },
+        { currentUser }
+      ) => {
+        const article = await Articles.findOne({ id });
+
+        const articleStatus = currentUser.role === ADMIN ? true : false;
+
+        const articleData = formatObject({
+          title,
+          content,
+          category_id: categoryId,
+          hastags,
+          description,
+          image_description: imageDescription,
+          author_id: currentUser.id,
+          is_verified: articleStatus
+        });
+        article.updateDoc(articleData);
+        await article.save();
+        return article;
+      }
     )
   }
 };

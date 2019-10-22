@@ -20,6 +20,7 @@ type Query {
   get_most_view_articles(amount: Int!): [Article!]!
   get_user_articles: [Article!]!
   get_lasted_articles(amount: Int!): [Article!]!
+  get_article(id: String!): Article!
 }
 
 type Mutation {
@@ -29,6 +30,18 @@ type Mutation {
     categoryId: String
     hastags: [String]
     description: String
+    imageDescription: String
+  ): Article!
+
+  delete_article(id: String): Article!
+
+  edit_article(
+    id: String!
+    title: String!
+    content: String!
+    categoryId: String!
+    hastags: [String]
+    description: String!
     imageDescription: String
   ): Article!
 }
