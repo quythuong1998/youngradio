@@ -16,7 +16,7 @@ const PostCardComponent = ({ col, category, title, description, image }) => (
     </div>
     <style jsx>{`
       .card-background-img {
-        background-image: ${image};
+        background-image: url("${image}");
       }
     `}</style>
   </div>

@@ -1,32 +1,43 @@
 import React from 'react';
-// import { compose } from 'recompose';
-// import { connect } from 'react-redux';
-// import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-// import {} from '../store/CategoryState';
+import {
+  getMostViewArticles,
+  mostViewArticlesDataSelector,
+  getLastedArticles,
+  lastedArticlesDataSelector
+} from '../stores/ArticleState';
 import MostViewPostsComponent from '../components/MostViewPostsComponent';
 import RandomPostsComponent from '../components/RandomPostsComponent';
 import TypicalAuthorsComponent from '../components/TypicalAuthorsComponent';
 import LastedPostsComponent from '../components/LastedPostsComponent';
-// const connectToRedux = connect(
-//   createStructuredSelector(
-//     {
-//       categories: getAllCategorySelector
-//     },
-//     dispatch => ({
-//       getAllCategory: () => {
-//         dispatch(getAllCategory());
-//       }
-//     })
-//   )
-// );
+
+const connectToRedux = connect(
+  createStructuredSelector({
+    mostViewArticles: mostViewArticlesDataSelector,
+    lastedArticles: lastedArticlesDataSelector
+  }),
+  dispatch => ({
+    GetMostViewArticles: amount => {
+      dispatch(getMostViewArticles(amount));
+    },
+    GetLastedArticles: amount => {
+      dispatch(getLastedArticles(amount));
+    }
+  })
+);
+const MOST_VIEW_ARTICLES = 3;
+const LASTED_ARTICLES = 3;
 
 class IndexBodyComponent extends React.Component {
-  //   componentWillMount() {
-  //     this.props.getAllCategorySelector();
-  //   }
+  componentDidMount() {
+    this.props.GetMostViewArticles(MOST_VIEW_ARTICLES);
+    this.props.GetLastedArticles(LASTED_ARTICLES);
+  }
 
   render() {
+    const { mostViewArticles, lastedArticles } = this.props;
     return (
       <div className="main main-raised">
         <div className="container">
@@ -37,8 +48,8 @@ class IndexBodyComponent extends React.Component {
               </div>
             </div>
           </div>
-          <MostViewPostsComponent />
-          <LastedPostsComponent />
+          <MostViewPostsComponent mostViewArticlesData={mostViewArticles} />
+          <LastedPostsComponent lastedArticlesData={lastedArticles} />
           <RandomPostsComponent />
           <TypicalAuthorsComponent />
         </div>
@@ -47,4 +58,4 @@ class IndexBodyComponent extends React.Component {
   }
 }
 
-export default IndexBodyComponent;
+export default connectToRedux(IndexBodyComponent);

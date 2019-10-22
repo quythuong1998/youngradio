@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { Users } from '../services';
 import { MALE } from '../enums/userGender';
 import { USER_ACTIVE } from '../enums/userStatus';
-import { AUTHOR, ADMIN } from '../enums/userRole';
+import { USER, ADMIN } from '../enums/userRole';
 
 const authorUser = {
   username: 'author',
@@ -14,7 +14,7 @@ const authorUser = {
   birth_date: '19/10/1998',
   quote: 'Death is like a wind, always by my side.',
   status: USER_ACTIVE,
-  role: AUTHOR,
+  role: USER,
   profession: 'Student'
 };
 
