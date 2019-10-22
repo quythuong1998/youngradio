@@ -228,7 +228,7 @@ export const getUserArticlesDataSelector = flow(
 );
 
 const GetLastedArticlesAPI = makeFetchAction(
-  GET_MOST_VIEW_ARTICLES_API,
+  GET_LASTED_ARTICLES_API,
   gql`
     query($amount: Int!) {
       get_lasted_articles(amount: $amount) {
