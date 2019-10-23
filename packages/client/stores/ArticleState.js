@@ -10,6 +10,8 @@ export const GET_LASTED_ARTICLES_API = 'GetLastedArticlesAPI';
 export const DELETE_ARTICLE_API = 'DeleteArticleAPI';
 export const GET_ARTICLE = 'GetArticle';
 export const EDIT_ARTICLE = 'EditArticle';
+export const GET_ARTICLES_BY_CATEGORY = 'GetArticlesByCategory';
+export const GET_ARTICLES_BY_RANDOM_CATEGORY = 'GetArticlesByRandomCategory';
 
 export const resetDataEditArticle = dispatch => {
   dispatch(EditArticleAPI.resetter(['data', 'error']));
@@ -318,4 +320,67 @@ export const editArticleErrorMessageSelector = flow(
 //   join(' | ')
 // );
 
+const GetArticlesByCategoryAPI = makeFetchAction(
+  GET_ARTICLES_BY_CATEGORY,
+  gql`
+    query($categoryId: String!) {
+      get_articles_by_category(categoryId: $categoryId) {
+        category
+        title
+        description
+        imageDescription
+      }
+    }
+  `
+);
+
+export const getArticlesByCategory = categoryId => {
+  return respondToSuccess(
+    GetArticlesByCategoryAPI.actionCreator({ categoryId }),
+    resp => {
+      if (resp.errors) {
+        console.error('Err:', resp.errors);
+        return;
+      }
+      return;
+    }
+  );
+};
+
+export const getArticlesByCategoryDataSelector = flow(
+  GetArticlesByCategoryAPI.dataSelector,
+  path('data.get_articles_by_category')
+);
+
+const GetArticlesByRandomCategoryAPI = makeFetchAction(
+  GET_ARTICLES_BY_RANDOM_CATEGORY,
+  gql`
+    query {
+      get_articles_by_random_category {
+        category
+        title
+        description
+        imageDescription
+      }
+    }
+  `
+);
+
+export const getArticlesByRandomCategory = () => {
+  return respondToSuccess(
+    GetArticlesByRandomCategoryAPI.actionCreator(),
+    resp => {
+      if (resp.errors) {
+        console.error('Err:', resp.errors);
+        return;
+      }
+      return;
+    }
+  );
+};
+
+export const getArticlesByRandomCategoryDataSelector = flow(
+  GetArticlesByRandomCategoryAPI.dataSelector,
+  path('data.get_articles_by_random_category')
+);
 export default {};

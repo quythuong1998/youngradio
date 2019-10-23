@@ -8,6 +8,12 @@ import {
   getLastedArticles,
   lastedArticlesDataSelector
 } from '../stores/ArticleState';
+
+import {
+  getTypycalUsers,
+  getTypycalUsersDataSelector
+} from '../stores/UserState';
+
 import MostViewPostsComponent from '../components/MostViewPostsComponent';
 import RandomPostsComponent from '../components/RandomPostsComponent';
 import TypicalAuthorsComponent from '../components/TypicalAuthorsComponent';
@@ -16,7 +22,8 @@ import LastedPostsComponent from '../components/LastedPostsComponent';
 const connectToRedux = connect(
   createStructuredSelector({
     mostViewArticles: mostViewArticlesDataSelector,
-    lastedArticles: lastedArticlesDataSelector
+    lastedArticles: lastedArticlesDataSelector,
+    typycalUsers: getTypycalUsersDataSelector
   }),
   dispatch => ({
     GetMostViewArticles: amount => {
@@ -24,6 +31,9 @@ const connectToRedux = connect(
     },
     GetLastedArticles: amount => {
       dispatch(getLastedArticles(amount));
+    },
+    GetTypycalUsers: () => {
+      dispatch(getTypycalUsers());
     }
   })
 );
@@ -34,10 +44,15 @@ class IndexBodyComponent extends React.Component {
   componentDidMount() {
     this.props.GetMostViewArticles(MOST_VIEW_ARTICLES);
     this.props.GetLastedArticles(LASTED_ARTICLES);
+    this.props.GetTypycalUsers();
   }
 
   render() {
-    const { mostViewArticles, lastedArticles } = this.props;
+    const {
+      mostViewArticles = [],
+      lastedArticles = [],
+      typycalUsers = []
+    } = this.props;
     return (
       <div className="main main-raised">
         <div className="container">
@@ -51,7 +66,7 @@ class IndexBodyComponent extends React.Component {
           <MostViewPostsComponent mostViewArticlesData={mostViewArticles} />
           <LastedPostsComponent lastedArticlesData={lastedArticles} />
           <RandomPostsComponent />
-          <TypicalAuthorsComponent />
+          <TypicalAuthorsComponent typycalUsersData={typycalUsers} />
         </div>
       </div>
     );

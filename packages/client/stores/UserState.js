@@ -11,6 +11,37 @@ const USER_LOGIN_API = 'UserLoginAPI';
 const GET_CURRENT_USER_API = 'GetCurrentUserAPI';
 const USER_LOGOUT = 'UserLogout';
 const USER_LOGOUT_API = 'UserLogoutAPI';
+const GET_TYPYCAL_USERS_API = 'GetTypycalUsersAPI';
+
+const GetTypycalUsersAPI = makeFetchAction(
+  GET_TYPYCAL_USERS_API,
+  gql`
+    query {
+      get_three_authors_typical {
+        fullName
+        profession
+        quote
+        avatar
+        id
+      }
+    }
+  `
+);
+
+export const getTypycalUsers = () => {
+  return respondToSuccess(GetTypycalUsersAPI.actionCreator(), resp => {
+    if (resp.errors) {
+      console.error('Err:', resp.errors);
+      return;
+    }
+    return;
+  });
+};
+
+export const getTypycalUsersDataSelector = flow(
+  GetTypycalUsersAPI.dataSelector,
+  get('data.get_three_authors_typical')
+);
 
 const UserLoginAPI = makeFetchAction(
   USER_LOGIN_API,
