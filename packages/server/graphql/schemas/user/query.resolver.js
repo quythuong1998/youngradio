@@ -1,8 +1,7 @@
-import { Users, Articles } from '../../../services';
+import { Users } from '../../../services';
 
 import { combineResolvers } from 'graphql-resolvers';
 import { checkAuthentication } from '../../libs';
-import { ADMIN } from '../../../enums/userRole';
 
 module.exports = {
   Query: {
@@ -15,16 +14,10 @@ module.exports = {
       }
       throw new Error('Incorrect username or Password!');
     },
+
+    //TODO: refactor later!
     get_three_authors_typical: async () => {
-      const authorsTypical = [];
-      while (authorsTypical.length < 3) {
-        const author = await Users.aggregate([{ $sample: { size: 1 } }]);
-        const article = await Articles.find({ author_id: author.id });
-        if (article) {
-          authorsTypical.push(author);
-        }
-      }
-      return authorsTypical;
+      return Users.aggregate([{ $sample: { size: 3 } }]);
     },
 
     get_current_user: combineResolvers(

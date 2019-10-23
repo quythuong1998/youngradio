@@ -1,5 +1,5 @@
 import { combineResolvers } from 'graphql-resolvers';
-import { Articles } from '../../../services';
+import { Articles, Categories } from '../../../services';
 import { sortDefaultOptions } from '../../libs/options';
 import { checkAuthentication } from '../../libs';
 
@@ -26,6 +26,23 @@ module.exports = {
 
     get_article: async (_, { id }) => {
       return Articles.findOne({ id });
+    },
+
+    get_articles_by_category: async (_, { categoryId }) => {
+      return Articles.find({ category_id: categoryId }).sort(
+        sortDefaultOptions
+      );
+    },
+    get_articles_by_random_category: async () => {
+      const randomCategory = await Categories.aggregate([
+        { $sample: { size: 1 } }
+      ]);
+
+      const categoryId = randomCategory[0].id;
+
+      return Articles.find({ category_id: categoryId }).sort(
+        sortDefaultOptions
+      );
     }
   }
 };
