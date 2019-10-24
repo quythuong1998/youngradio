@@ -1,11 +1,11 @@
 import React from 'react';
-import UserPageLayout from '../layouts/UserPageLayout';
+import HomePageLayout from '../layouts/HomePageLayout';
 import BlogsComponent from '../components/BlogsComponent';
 
 const BlogsPage = rootProps => (
-  <UserPageLayout {...rootProps} title="not config">
+  <HomePageLayout {...rootProps} title="not config">
     <BlogsComponent />
-  </UserPageLayout>
+  </HomePageLayout>
 );
 
 export default BlogsPage;

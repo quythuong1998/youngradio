@@ -25,6 +25,10 @@ module.exports = {
       (_, __, { currentUser }) => {
         return Users.findOne({ id: currentUser.id });
       }
-    )
+    ),
+
+    get_author_by_id: async authorId => {
+      return Users.findOne({ id: authorId });
+    }
   }
 };
