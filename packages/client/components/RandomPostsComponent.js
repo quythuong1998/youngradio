@@ -76,6 +76,7 @@ class RandomPostsComponent extends React.Component {
                 description={item.description}
                 image={item.imageDescription}
                 key={index}
+                articleId={item.id}
               />
             ))}
         </div>

@@ -242,6 +242,7 @@ const GetLastedArticlesAPI = makeFetchAction(
         authorAvatar
         authorId
         createdAt
+        id
       }
     }
   `
@@ -268,6 +269,7 @@ const GetMostViewArticlesAPI = makeFetchAction(
         imageDescription
         title
         category
+        id
       }
     }
   `
@@ -329,6 +331,7 @@ const GetArticlesByCategoryAPI = makeFetchAction(
         title
         description
         imageDescription
+        id
       }
     }
   `
@@ -361,6 +364,7 @@ const GetArticlesByRandomCategoryAPI = makeFetchAction(
         title
         description
         imageDescription
+        id
       }
     }
   `

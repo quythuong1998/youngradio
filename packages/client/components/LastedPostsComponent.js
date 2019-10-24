@@ -21,6 +21,7 @@ class RandomPostsComponent extends React.Component {
                 time={item.createdAt}
                 authorAvatar={item.authorAvatar}
                 authorId={item.authorId}
+                articleId={item.id}
               />
             ))}
         </div>

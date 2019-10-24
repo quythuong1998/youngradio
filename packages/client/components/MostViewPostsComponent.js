@@ -18,6 +18,7 @@ class MostViewPostsComponent extends React.Component {
                   description={item.description}
                   image={item.imageDescription}
                   key={index}
+                  articleId={item.id}
                 />
               )
           )}
@@ -32,6 +33,7 @@ class MostViewPostsComponent extends React.Component {
                   description={item.description}
                   image={item.imageDescription}
                   key={index}
+                  articleId={item.id}
                 />
               )
           )}
