@@ -89,7 +89,7 @@ class UserPageComponent extends React.Component {
                             image={item.imageDescription}
                             key={index}
                             actionDelete={() => DeleteArticle(item.id)}
-                            idArticle={item.id}
+                            articleId={item.id}
                           />
                         ))
                       ) : (

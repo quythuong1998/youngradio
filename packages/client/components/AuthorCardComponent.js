@@ -1,12 +1,15 @@
 import React from 'react';
+import Link from 'next/link';
 
 const AuthorCardComponent = ({ image, name, profession, quote, userId }) => (
   <div className="col-md-4">
     <div className="card card-testimonial card-plain">
       <div className="card-avatar">
-        <a href={`/user?id=${userId}`}>
-          <img className="img" src={image} alt="mock-img" />
-        </a>
+        <Link href={`/user?id=${userId}`}>
+          <a>
+            <img className="img" src={image} alt="mock-img" />
+          </a>
+        </Link>
       </div>
       <div className="card-body ">
         <h4 className="card-title">{name}</h4>

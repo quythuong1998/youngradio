@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const PostCardComponent = ({
   col,
@@ -12,16 +13,17 @@ const PostCardComponent = ({
     <div className="card card-raised card-background card-background-img">
       <div className="card-body">
         <h6 className="card-category text-info">{category}</h6>
-        <a href={`/article?id=${articleId}`}>
-          <h3 className="card-title">{title}</h3>
-        </a>
+        <Link href={`/article?id=${articleId}`}>
+          <a>
+            <h3 className="card-title">{title}</h3>
+          </a>
+        </Link>
         <p className="card-description">{description}</p>
-        <a
-          href={`/article?id=${articleId}`}
-          className="btn btn-warning btn-round"
-        >
-          <i className="material-icons">format_align_left</i> Read Article
-        </a>
+        <Link href={`/article?id=${articleId}`}>
+          <a className="btn btn-warning btn-round">
+            <i className="material-icons">format_align_left</i> Read Article
+          </a>
+        </Link>
       </div>
     </div>
     <style jsx>{`

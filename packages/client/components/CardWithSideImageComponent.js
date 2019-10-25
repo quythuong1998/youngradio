@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+
 const CardWithSideImageComponent = ({
   category,
   title,
@@ -14,14 +15,18 @@ const CardWithSideImageComponent = ({
   <div className="col-lg-4 col-md-6">
     <div className="card card-blog">
       <div className="card-header card-header-image">
-        <a href="#pablo">
-          <img className="img" alt="img" src={image} />
-        </a>
+        <Link href={`/article?id=${articleId}`}>
+          <a>
+            <img className="img" alt="img" src={image} />
+          </a>
+        </Link>
       </div>
       <div className="card-body ">
         <h6 className="card-category text-success">{category}</h6>
         <h4 className="card-title">
-          <a href={`/article?id=${articleId}`}>{title}</a>
+          <Link href={`/article?id=${articleId}`}>
+            <a>{title}</a>
+          </Link>
         </h4>
         <p className="card-description">{description}</p>
       </div>
