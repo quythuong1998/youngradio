@@ -27,8 +27,8 @@ module.exports = {
       }
     ),
 
-    get_author_by_id: async authorId => {
-      return Users.findOne({ id: authorId });
+    get_author_by_id: async (_, { authorId }) => {
+      return Users.findOne({ id: authorId }) || {};
     }
   }
 };

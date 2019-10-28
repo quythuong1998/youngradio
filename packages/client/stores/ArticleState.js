@@ -84,6 +84,7 @@ const GetArticleAPI = makeFetchAction(
         categoryId
         hastags
         imageDescription
+        authorId
       }
     }
   `
@@ -102,6 +103,10 @@ export const getArticleDataSelector = flow(
   GetArticleAPI.dataSelector,
   path('data.get_article')
 );
+
+export const resetDataGetArticle = dispatch => {
+  dispatch(GetArticleAPI.resetter(['data', 'error']));
+};
 
 const DeleteArticleAPI = makeFetchAction(
   DELETE_ARTICLE_API,

@@ -1,5 +1,26 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import {
+  getAuthorById,
+  getAuthorByIdDataSelector,
+  resetDataGetAuthorById
+} from '../stores/UserState';
+const connectToRedux = connect(
+  createStructuredSelector({
+    authorData: getAuthorByIdDataSelector
+  }),
+  dispatch => ({
+    GetAuthorById: authorId => {
+      authorId && dispatch(getAuthorById(authorId));
+    },
+    resetData: () => {
+      resetDataGetAuthorById(dispatch);
+    }
+  })
+);
+
 const AuthorQuote = ({ image, authorName, AuthorQuote }) => (
   <div className="card card-profile card-plain">
     <div className="row">
@@ -11,7 +32,7 @@ const AuthorQuote = ({ image, authorName, AuthorQuote }) => (
           <div className="ripple-container"></div>
         </div>
       </div>
-      <div className="col-md-8">
+      <div className="col-md-10">
         <h4 className="card-title">{authorName}</h4>
         <p className="description">{AuthorQuote}</p>
       </div>
@@ -19,53 +40,62 @@ const AuthorQuote = ({ image, authorName, AuthorQuote }) => (
   </div>
 );
 
-const ArticleContentComponent = ({
-  title,
-  contents,
-  tags,
-  authorAvatar,
-  QuoteAuthor,
-  authorName
-}) => (
-  <div className="main main-raised" id="content-section">
-    <div className="container">
-      <div className="section section-text">
-        <div className="row">
-          <div className="col-md-8 ml-auto mr-auto">
-            <h3 className="title">{title}</h3>
-            {contents}
-          </div>
-        </div>
-      </div>
-      <div className="section section-blog-info">
-        <div className="row">
-          <div className="col-md-8 ml-auto mr-auto">
+class ArticleContentComponent extends React.Component {
+  componentWillUnmount() {
+    this.props.resetData();
+  }
+
+  componentDidMount() {
+    const { authorId } = this.props;
+    this.props.GetAuthorById(authorId);
+  }
+
+  render() {
+    const { title, contents, tags, authorData } = this.props;
+
+    return (
+      <div className="main main-raised" id="content-section">
+        <div className="container">
+          <div className="section section-text">
             <div className="row">
-              <div className="col-md-6">
-                <div className="blog-tags">
-                  Tags:{' '}
-                  {tags &&
-                    tags.map((item, key) => (
-                      <span
-                        className="badge badge-primary badge-pill"
-                        key={key}
-                      >
-                        {item}
-                      </span>
-                    ))}
-                </div>
+              <div className="col-md-8 ml-auto mr-auto">
+                <h3 className="title">{title}</h3>
+                {contents}
               </div>
             </div>
-            <hr />
-            <AuthorQuote
-              image={authorAvatar}
-              authorName={authorName}
-              AuthorQuote={QuoteAuthor}
-            />
           </div>
-        </div>
-      </div>
-      {/* <div className="section section-comments">
+          <div className="section section-blog-info">
+            <div className="row">
+              <div className="col-md-8 ml-auto mr-auto">
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="blog-tags">
+                      Tags:{' '}
+                      {tags &&
+                        tags.map((item, key) => (
+                          <span
+                            className="badge badge-primary badge-pill"
+                            key={key}
+                          >
+                            {item}
+                          </span>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+                <hr />
+
+                {authorData && (
+                  <AuthorQuote
+                    image={authorData.avatar}
+                    authorName={authorData.fullName}
+                    AuthorQuote={authorData.quote}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+          {/* <div className="section section-comments">
         <div className="row">
           <div className="col-md-8 ml-auto mr-auto">
             <div className="media-area">
@@ -226,8 +256,10 @@ const ArticleContentComponent = ({
           </div>
         </div>
       </div> */}
-    </div>
-  </div>
-);
+        </div>
+      </div>
+    );
+  }
+}
 
-export default ArticleContentComponent;
+export default connectToRedux(ArticleContentComponent);

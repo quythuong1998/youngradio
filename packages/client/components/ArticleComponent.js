@@ -3,7 +3,11 @@ import parse from 'html-react-parser';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import PageNotFoundComponent from '../components/PageNotFoundComponent';
-import { getArticle, getArticleDataSelector } from '../stores/ArticleState';
+import {
+  getArticle,
+  getArticleDataSelector,
+  resetDataGetArticle
+} from '../stores/ArticleState';
 import ArticleDescriptionComponent from '../components/ArticleDescriptionComponent';
 import ArticleContentComponent from '../components/ArticleContentComponent';
 
@@ -14,6 +18,9 @@ const connectToRedux = connect(
   dispatch => ({
     GetArticle: articleId => {
       dispatch(getArticle(articleId));
+    },
+    resetData: () => {
+      resetDataGetArticle(dispatch);
     }
   })
 );
@@ -23,11 +30,13 @@ class ArticleComponent extends React.Component {
     const { articleId } = this.props;
     this.props.GetArticle(articleId.id);
   }
+  componentWillUnmount() {
+    this.props.resetData();
+  }
+
   render() {
-    //   2e317881-42d3-42f3-b553-1c3645a646df
     const { articleData } = this.props;
     const contentData = articleData && parse(articleData.content);
-    console.log(articleData);
     return (
       <React.Fragment>
         {!articleData ? (
@@ -43,6 +52,7 @@ class ArticleComponent extends React.Component {
               title={articleData.title}
               contents={contentData}
               tags={articleData.hastags}
+              authorId={articleData.authorId}
             />
           </div>
         )}
