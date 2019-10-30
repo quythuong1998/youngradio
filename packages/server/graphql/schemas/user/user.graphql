@@ -22,6 +22,7 @@ type Query {
   login_user(username: String!, password: String!): User!
   get_three_authors_typical: [User!]!
   get_current_user: User!
+  get_author_by_id(authorId: String!): User!
 }
 
 enum UserStatus {

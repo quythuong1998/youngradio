@@ -86,8 +86,12 @@ class SharePostComponent extends React.Component {
               <div className="row">
                 <div className="col-md-12 col-sm-12">
                   <h2 className="title text-center"> Share your article </h2>
+
                   {successMessage ? (
-                    <PostSuccessComponent userRole={currentUser.role} />
+                    <PostSuccessComponent
+                      userRole={currentUser.role}
+                      articleId={successMessage.id}
+                    />
                   ) : (
                     <div className="form-group has-default bmd-form-group">
                       <form onSubmit={handleSubmit}>

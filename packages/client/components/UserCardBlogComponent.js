@@ -3,7 +3,7 @@ import Popup from 'reactjs-popup';
 import Link from 'next/link';
 class UserCardBlogComponent extends React.Component {
   render() {
-    const { category, title, image, actionDelete, idArticle } = this.props;
+    const { category, title, image, actionDelete, articleId } = this.props;
     return (
       <div className="col-lg-4 col-md-6">
         <div className="rotating-card-container">
@@ -18,7 +18,9 @@ class UserCardBlogComponent extends React.Component {
               <div className="card-body">
                 <h6 className="card-category text-warning">{category}</h6>
                 <h4 className="card-title">
-                  <a href="#pablo">{title}</a>
+                  <Link href={`/article?id=${articleId}`}>
+                    <a>{title}</a>
+                  </Link>
                 </h4>
               </div>
             </div>
@@ -29,12 +31,13 @@ class UserCardBlogComponent extends React.Component {
                   You can edit or delete the posts.
                 </p>
                 <div className="footer text-center">
-                  {' '}
-                  <a href="#pablo" className="btn btn-rose btn-round">
-                    <i className="material-icons">subject</i> Read
-                    <div className="ripple-container"></div>
-                  </a>
-                  <Link href={'edit-article?id=' + idArticle}>
+                  <Link href={`/article?id=${articleId}`}>
+                    <a className="btn btn-rose btn-round">
+                      <i className="material-icons">subject</i> Read
+                      <div className="ripple-container"></div>
+                    </a>
+                  </Link>
+                  <Link href={'edit-article?id=' + articleId}>
                     <a className="btn btn-success btn-just-icon btn-fill btn-round btn-wd ml-2">
                       <i className="material-icons">mode_edit</i>
                     </a>

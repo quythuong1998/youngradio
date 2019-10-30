@@ -84,6 +84,7 @@ const GetArticleAPI = makeFetchAction(
         categoryId
         hastags
         imageDescription
+        authorId
       }
     }
   `
@@ -102,6 +103,10 @@ export const getArticleDataSelector = flow(
   GetArticleAPI.dataSelector,
   path('data.get_article')
 );
+
+export const resetDataGetArticle = dispatch => {
+  dispatch(GetArticleAPI.resetter(['data', 'error']));
+};
 
 const DeleteArticleAPI = makeFetchAction(
   DELETE_ARTICLE_API,
@@ -242,6 +247,7 @@ const GetLastedArticlesAPI = makeFetchAction(
         authorAvatar
         authorId
         createdAt
+        id
       }
     }
   `
@@ -268,6 +274,7 @@ const GetMostViewArticlesAPI = makeFetchAction(
         imageDescription
         title
         category
+        id
       }
     }
   `
@@ -329,6 +336,7 @@ const GetArticlesByCategoryAPI = makeFetchAction(
         title
         description
         imageDescription
+        id
       }
     }
   `
@@ -361,6 +369,7 @@ const GetArticlesByRandomCategoryAPI = makeFetchAction(
         title
         description
         imageDescription
+        id
       }
     }
   `

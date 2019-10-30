@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { USER } from '../enums/userRole';
-const PostSuccessComponent = ({ userRole }) => (
+const PostSuccessComponent = ({ userRole, articleId }) => (
   <div className="row">
     <div className="col-lg-6">
       <img
@@ -17,7 +17,7 @@ const PostSuccessComponent = ({ userRole }) => (
         {userRole === USER && (
           <h4>Pleae waiting for approval from moderator!</h4>
         )}
-        <Link href="/">
+        <Link href={`/article?id=${articleId}`}>
           <a>View your article</a>
         </Link>
       </div>

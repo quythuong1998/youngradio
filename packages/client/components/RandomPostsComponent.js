@@ -54,7 +54,6 @@ class RandomPostsComponent extends React.Component {
               <li className="nav-item" key={key}>
                 <a
                   className="nav-link"
-                  href="#pill1"
                   data-toggle="tab"
                   onClick={() => {
                     this.props.GetArticlesByCategory(item.id);
@@ -76,6 +75,7 @@ class RandomPostsComponent extends React.Component {
                 description={item.description}
                 image={item.imageDescription}
                 key={index}
+                articleId={item.id}
               />
             ))}
         </div>

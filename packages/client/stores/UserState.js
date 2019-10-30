@@ -12,6 +12,44 @@ const GET_CURRENT_USER_API = 'GetCurrentUserAPI';
 const USER_LOGOUT = 'UserLogout';
 const USER_LOGOUT_API = 'UserLogoutAPI';
 const GET_TYPYCAL_USERS_API = 'GetTypycalUsersAPI';
+const GET_AUTHOR_BY_ID_API = 'GetAuthorByIdAPI';
+
+const GetAuthorByIdAPI = makeFetchAction(
+  GET_AUTHOR_BY_ID_API,
+  gql`
+    query($authorId: String!) {
+      get_author_by_id(authorId: $authorId) {
+        fullName
+        profession
+        quote
+        avatar
+        id
+      }
+    }
+  `
+);
+
+export const getAuthorById = authorId => {
+  return respondToSuccess(
+    GetAuthorByIdAPI.actionCreator({ authorId }),
+    resp => {
+      if (resp.errors) {
+        console.error('Err:', resp.errors);
+        return;
+      }
+      return;
+    }
+  );
+};
+
+export const getAuthorByIdDataSelector = flow(
+  GetAuthorByIdAPI.dataSelector,
+  get('data.get_author_by_id')
+);
+
+export const resetDataGetAuthorById = dispatch => {
+  dispatch(GetAuthorByIdAPI.resetter(['data', 'error']));
+};
 
 const GetTypycalUsersAPI = makeFetchAction(
   GET_TYPYCAL_USERS_API,
