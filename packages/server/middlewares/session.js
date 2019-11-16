@@ -6,10 +6,14 @@ import brn from 'brn';
 import ms from 'ms';
 const redis = require('redis');
 const redisClient = redis.createClient();
+// const redisClient = redis.createClient(process.env.REDIS_URL);
 
 const SESSION_KEY = 'keyne';
 const RedisStore = redisConnect(session);
 const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
+// const redisUrl =
+//   process.env.REDIS_URL ||
+//   'redis://h:p23c383f9f020413ac10dd56b5507a68b1322478ccdf460184f418764cdb11700@ec2-3-232-50-151.compute-1.amazonaws.com:11199';
 
 const generateSessionKey = flow(
   split('.'),

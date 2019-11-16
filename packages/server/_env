@@ -1,7 +1,7 @@
 NODE_PORT=3003
 HOST_ORIGIN=localhost
 GRAPHQL_PATH="/graphql"
-MONGO_URL="mongodb://localhost:27017"
+MONGODB_URI="mongodb://localhost:27017"
 MONGO_DB="YoungRadio"
 NODE_ENV=development
 MONGO_OPTIONS="{"useNewUrlParser":true}"
