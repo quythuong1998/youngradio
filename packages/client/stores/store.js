@@ -22,6 +22,7 @@ const logger = () => next => action => {
 
 const makeStore = initialState => {
   const base = process.env.API_SERVER_URL || 'http://localhost:3003';
+  // const base = 'https://youngradio-server.herokuapp.com/graphql';
   const enhancers = compact([
     applyMiddleware(
       logger,
