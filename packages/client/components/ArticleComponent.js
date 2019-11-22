@@ -8,19 +8,26 @@ import {
   getArticleDataSelector,
   resetDataGetArticle
 } from '../stores/ArticleState';
+import {
+  getAuthorByIdDataSelector,
+  resetDataGetAuthorById
+} from '../stores/UserState';
 import ArticleDescriptionComponent from '../components/ArticleDescriptionComponent';
 import ArticleContentComponent from '../components/ArticleContentComponent';
-
+import ArticleCommentComponent from './ArticleCommentComponent';
 const connectToRedux = connect(
   createStructuredSelector({
-    articleData: getArticleDataSelector
+    articleData: getArticleDataSelector,
+    authorData: getAuthorByIdDataSelector
   }),
   dispatch => ({
     GetArticle: articleId => {
       dispatch(getArticle(articleId));
     },
+
     resetData: () => {
       resetDataGetArticle(dispatch);
+      resetDataGetAuthorById(dispatch);
     }
   })
 );
@@ -30,13 +37,15 @@ class ArticleComponent extends React.Component {
     const { articleId } = this.props;
     this.props.GetArticle(articleId.id);
   }
+
   componentWillUnmount() {
     this.props.resetData();
   }
 
   render() {
-    const { articleData } = this.props;
+    const { articleData, authorData } = this.props;
     const contentData = articleData && parse(articleData.content);
+
     return (
       <React.Fragment>
         {!articleData ? (
@@ -48,12 +57,18 @@ class ArticleComponent extends React.Component {
               description={articleData.description}
               image={articleData.imageDescription}
             />
-            <ArticleContentComponent
-              title={articleData.title}
-              contents={contentData}
-              tags={articleData.hastags}
-              authorId={articleData.authorId}
-            />
+            <div className="main main-raised" id="content-section">
+              <div className="container">
+                <ArticleContentComponent
+                  title={articleData.title}
+                  contents={contentData}
+                  tags={articleData.hastags}
+                  authorData={authorData}
+                />
+
+                <ArticleCommentComponent articleData={articleData} />
+              </div>
+            </div>
           </div>
         )}
       </React.Fragment>

@@ -2,7 +2,7 @@ import { makeFetchAction } from 'redux-api-call';
 import { respondToSuccess } from '../middlewares/api-reaction';
 import { flow, path, map, join } from 'lodash/fp';
 import { gql } from '../libs/graphql';
-
+import { getAuthorById } from './UserState';
 export const CREATE_ARTICLE_API = 'CreateArticleAPI';
 export const GET_USER_ARTICLES_API = 'GetUserArticlesAPI';
 export const GET_MOST_VIEW_ARTICLES_API = 'GetMostViewArticlesAPI';
@@ -17,7 +17,7 @@ export const resetDataEditArticle = dispatch => {
   dispatch(EditArticleAPI.resetter(['data', 'error']));
 };
 
-export const EditArticleAPI = makeFetchAction(
+const EditArticleAPI = makeFetchAction(
   EDIT_ARTICLE,
   gql`
     mutation(
@@ -78,6 +78,7 @@ const GetArticleAPI = makeFetchAction(
   gql`
     query($id: String!) {
       get_article(id: $id) {
+        id
         title
         description
         content
@@ -91,13 +92,19 @@ const GetArticleAPI = makeFetchAction(
 );
 
 export const getArticle = id =>
-  respondToSuccess(GetArticleAPI.actionCreator({ id }), resp => {
-    if (resp.errors) {
-      console.error('Err:', resp.errors);
+  respondToSuccess(
+    GetArticleAPI.actionCreator({ id }),
+    (resp, headers, store) => {
+      if (resp.errors) {
+        console.error('Err:', resp.errors);
+        return;
+      }
+
+      const authorId = resp.data.get_article.authorId;
+      store.dispatch(getAuthorById(authorId));
       return;
     }
-    return;
-  });
+  );
 
 export const getArticleDataSelector = flow(
   GetArticleAPI.dataSelector,
