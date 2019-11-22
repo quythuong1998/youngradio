@@ -5,8 +5,8 @@ type Article {
   authorId: String!
   categoryId: String!
   hastags: [String]
-  createdAt: String!
-  updatedAt: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   view: String!
   description: String!
   imageDescription: String
