@@ -30,6 +30,7 @@ module.exports = {
         return article;
       }
     ),
+    // TODO check who can delete post: admin can delete any article
     delete_article: combineResolvers(checkAuthentication, async (_, { id }) => {
       const article = await Articles.findOne({ id });
       article.remove();

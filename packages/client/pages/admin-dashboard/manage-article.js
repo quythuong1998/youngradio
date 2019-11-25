@@ -1,14 +1,13 @@
 import React from 'react';
 import UserPageLayout from '../../layouts/UserPageLayout';
-import ManageCategoryComponent from '../../components/ManageCategoryComponent';
+import ManageArticleComponent from '../../components/ManageArticleComponent';
 import AuthenHOC from '../../components/HOC/AuthenHOC';
 import AdminDashboardLayout from '../../layouts/AdminDashboardLayout';
-
-const ManageCategoryPage = rootProps => (
+const ManageArticlePage = rootProps => (
   <UserPageLayout {...rootProps} title="not config">
     <AdminDashboardLayout />
-    <ManageCategoryComponent />
+    <ManageArticleComponent />
   </UserPageLayout>
 );
 
-export default AuthenHOC(ManageCategoryPage);
+export default AuthenHOC(ManageArticlePage);

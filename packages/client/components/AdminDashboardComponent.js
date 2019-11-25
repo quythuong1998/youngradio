@@ -47,14 +47,14 @@ class AdminDashboardComponent extends React.Component {
                     </div>
                   </div>
                 </Link>
-                <Link href="/">
+                <Link href="/admin-dashboard/manage-article">
                   <div className="col-md-4">
                     <div className="card card-pricing bg-success">
                       <div className="card-body ">
                         <div className="icon">
                           <i className="material-icons">post_add</i>
                         </div>
-                        <h3 className="card-title">Manage Posts</h3>
+                        <h3 className="card-title">Manage Articles</h3>
                       </div>
                     </div>
                   </div>

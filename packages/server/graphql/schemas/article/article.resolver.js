@@ -8,9 +8,9 @@ module.exports = {
     authorId: path('author_id'),
     categoryId: path('category_id'),
     isVerified: path('is_verified'),
-    category: async article => {
-      const category = await Categories.find({ id: article.category_id });
-      return category[0].name;
+    categoryName: async article => {
+      const category = await Categories.findOne({ id: article.category_id });
+      return category.name;
     },
     authorName: async article => {
       const author = await Users.findOne({ id: article.author_id });

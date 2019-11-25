@@ -1,7 +1,7 @@
 import { combineResolvers } from 'graphql-resolvers';
 import { Articles, Categories } from '../../../services';
 import { sortDefaultOptions } from '../../libs/options';
-import { checkAuthentication } from '../../libs';
+import { checkAuthentication, isAdmin } from '../../libs';
 
 module.exports = {
   Query: {
@@ -43,6 +43,10 @@ module.exports = {
       return Articles.find({ category_id: categoryId }).sort(
         sortDefaultOptions
       );
-    }
+    },
+
+    get_all_articles: combineResolvers(isAdmin, async () => {
+      return Articles.find({});
+    })
   }
 };

@@ -12,10 +12,45 @@ export const GET_ARTICLE = 'GetArticle';
 export const EDIT_ARTICLE = 'EditArticle';
 export const GET_ARTICLES_BY_CATEGORY = 'GetArticlesByCategory';
 export const GET_ARTICLES_BY_RANDOM_CATEGORY = 'GetArticlesByRandomCategory';
+export const GET_ALL_ARTICLES_API = 'GetAllArticlesAPI';
+
+// get_all_articles
 
 export const resetDataEditArticle = dispatch => {
   dispatch(EditArticleAPI.resetter(['data', 'error']));
 };
+const GetAllArticlesAPI = makeFetchAction(
+  GET_ALL_ARTICLES_API,
+  gql`
+    query {
+      get_all_articles {
+        id
+        title
+        description
+        content
+        categoryId
+        hastags
+        imageDescription
+        authorId
+        authorName
+        categoryName
+      }
+    }
+  `
+);
+
+export const getAllArticles = () =>
+  respondToSuccess(GetAllArticlesAPI.actionCreator({}), resp => {
+    if (resp.errors) {
+      console.error('Err:', resp.errors);
+      return;
+    }
+  });
+
+export const getAllArticlesDataSelector = flow(
+  GetAllArticlesAPI.dataSelector,
+  path('data.get_all_articles')
+);
 
 const EditArticleAPI = makeFetchAction(
   EDIT_ARTICLE,

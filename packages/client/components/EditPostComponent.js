@@ -9,7 +9,8 @@ import {
   editArticleErrorMessageSelector,
   getArticleDataSelector,
   resetDataEditArticle,
-  getArticle
+  getArticle,
+  resetDataGetArticle
 } from '../stores/ArticleState';
 import { getCurrentUserDataSelector } from '../stores/UserState';
 import PostSuccessComponent from './PostSuccessComponent';
@@ -32,6 +33,7 @@ const connectToRedux = connect(
   dispatch => ({
     resetData: () => {
       resetDataEditArticle(dispatch);
+      resetDataGetArticle(dispatch);
     },
     GetArticle: id => dispatch(getArticle(id))
   })
