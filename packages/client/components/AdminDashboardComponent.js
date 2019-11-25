@@ -59,7 +59,7 @@ class AdminDashboardComponent extends React.Component {
                     </div>
                   </div>
                 </Link>
-                <Link href="/">
+                <Link href="/admin-dashboard/manage-comment">
                   <div className="col-md-4">
                     <div className="card card-pricing bg-primary">
                       <div className="card-body ">

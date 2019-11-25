@@ -374,7 +374,7 @@ const GetArticlesByCategoryAPI = makeFetchAction(
   gql`
     query($categoryId: String!) {
       get_articles_by_category(categoryId: $categoryId) {
-        category
+        categoryName
         title
         description
         imageDescription
@@ -407,7 +407,7 @@ const GetArticlesByRandomCategoryAPI = makeFetchAction(
   gql`
     query {
       get_articles_by_random_category {
-        category
+        categoryName
         title
         description
         imageDescription
