@@ -1,13 +1,17 @@
 type Category {
-    id: ID!
-    name: String!
-    description: String!
+  id: ID!
+  name: String!
+  description: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Query {
-    get_all_category: [Category!]!
+  get_all_category: [Category!]!
 }
 
 type Mutation {
-    create_category(name: String!, description: String!): Category!
+  create_category(name: String!, description: String!): Category!
+  delete_category(id: String!): Category!
+  edit_category(id: String!, name: String!, description: String!): Category!
 }
