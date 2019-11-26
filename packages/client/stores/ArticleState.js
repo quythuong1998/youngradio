@@ -254,7 +254,7 @@ const GetUserArticlesAPI = makeFetchAction(
         description
         imageDescription
         title
-        category
+        categoryName
         id
       }
     }
@@ -284,7 +284,7 @@ const GetLastedArticlesAPI = makeFetchAction(
         description
         imageDescription
         title
-        category
+        categoryName
         authorName
         authorAvatar
         authorId
@@ -315,7 +315,7 @@ const GetMostViewArticlesAPI = makeFetchAction(
         description
         imageDescription
         title
-        category
+        categoryName
         id
       }
     }
