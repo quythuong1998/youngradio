@@ -15,6 +15,8 @@ import {
 import ArticleDescriptionComponent from '../components/ArticleDescriptionComponent';
 import ArticleContentComponent from '../components/ArticleContentComponent';
 import ArticleCommentComponent from './ArticleCommentComponent';
+const URL = process.env.DOMAIN_NAME || 'http://youngradio.live';
+
 const connectToRedux = connect(
   createStructuredSelector({
     articleData: getArticleDataSelector,
@@ -66,7 +68,11 @@ class ArticleComponent extends React.Component {
                   authorData={authorData}
                 />
 
-                <ArticleCommentComponent articleData={articleData} />
+                <ArticleCommentComponent
+                  url={`${URL}/article?id=${articleData.id}`}
+                  postId={articleData.id}
+                  title={articleData.title}
+                />
               </div>
             </div>
           </div>
