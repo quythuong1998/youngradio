@@ -3,6 +3,7 @@ import { respondToSuccess } from '../middlewares/api-reaction';
 import { flow, path, map, join } from 'lodash/fp';
 import { gql } from '../libs/graphql';
 import Router from 'next/router';
+import { getAuthorById } from './UserState';
 export const CREATE_BLOG_RADIO_API = 'CreateBlogRadioAPI';
 export const CREATE_BLOG_RADIO_TEMP_API = 'CreateBlogRadioTempAPI';
 export const DELETE_BLOG_RADIO_TEMP_API = 'DeleteBlogRadioTempAPI';
@@ -22,6 +23,9 @@ export const GetBlogRadioAPI = makeFetchAction(
         id
         content
         authorName
+        videoURL
+        hastags
+        authorId
       }
     }
   `
@@ -32,11 +36,15 @@ export const getBlogRadio = id => {
     GetBlogRadioAPI.actionCreator({
       id
     }),
-    resp => {
+
+    (resp, headers, store) => {
       if (resp.errors) {
         console.error('Err:', resp.errors);
         return;
       }
+
+      const authorId = resp.data.get_blog_radio.authorId;
+      store.dispatch(getAuthorById(authorId));
       return;
     }
   );

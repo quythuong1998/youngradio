@@ -21,7 +21,7 @@ const AuthorQuote = ({ image, authorName, AuthorQuote }) => (
 
 class ArticleContentComponent extends React.Component {
   render() {
-    const { title, contents, tags, authorData } = this.props;
+    const { title, contents, tags, authorData, videoPlayer } = this.props;
 
     return (
       <div>
@@ -29,6 +29,7 @@ class ArticleContentComponent extends React.Component {
           <div className="row">
             <div className="col-md-8 ml-auto mr-auto">
               <h3 className="title">{title}</h3>
+              {videoPlayer}
               {contents}
             </div>
           </div>

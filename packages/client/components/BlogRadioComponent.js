@@ -1,18 +1,27 @@
-// import parse from 'html-react-parser';
+import parse from 'html-react-parser';
 import React from 'react';
 import ReactPlayer from 'react-player';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ArticleDescriptionComponent from '../components/ArticleDescriptionComponent';
+import PageNotFoundComponent from './PageNotFoundComponent';
+import ArticleContentComponent from './ArticleContentComponent';
+import ArticleCommentComponent from './ArticleCommentComponent';
 import {
   getBlogRadio,
   getBlogRadioDataSelector,
   resetDataGetBlogRadio
 } from '../stores/RadioState';
+import {
+  getAuthorByIdDataSelector,
+  resetDataGetAuthorById
+} from '../stores/UserState';
+const URL = process.env.DOMAIN_NAME || 'http://youngradio.live';
 
 const connectToRedux = connect(
   createStructuredSelector({
-    blogRadioData: getBlogRadioDataSelector
+    blogRadioData: getBlogRadioDataSelector,
+    authorData: getAuthorByIdDataSelector
   }),
   dispatch => ({
     getBlogRadio: id => {
@@ -20,6 +29,7 @@ const connectToRedux = connect(
     },
     resetData: () => {
       resetDataGetBlogRadio(dispatch);
+      resetDataGetAuthorById(dispatch);
     }
   })
 );
@@ -35,92 +45,47 @@ class ArticleComponent extends React.Component {
   }
 
   render() {
-    // const { blogRadioData } = this.props;
-    // const contentData = blogRadioData && parse(blogRadioData.content);
-    // const opts = {
-    //   height: '390',
-    //   width: '640',
-    //   playerVars: {
-    //     // https://developers.google.com/youtube/player_parameters
-    //     autoplay: 1
-    //   }
-    // };
+    const { blogRadioData, authorData } = this.props;
+    const contentData = blogRadioData && parse(blogRadioData.content);
+
     return (
       <React.Fragment>
-        <link rel="stylesheet" href="/static/customs/video-react.css" />
-        {/* {!articleData ? (
+        {!blogRadioData ? (
           <PageNotFoundComponent />
-        ) : ( */}
-        <div>
-          <ArticleDescriptionComponent
-            // title={articleData.title}
-            // description={articleData.description}
-            // image={articleData.imageDescription}
-            title={'TEST NE'}
-            description={'TEST NE'}
-            image={'TEST NE'}
-          />
-          <div className="main main-raised" id="content-section">
-            <div className="container">
-              <div>
-                <div className="section section-text">
-                  <div className="row">
-                    <div className="col-md-8 ml-auto mr-auto">
-                      <h3 className="title">{'TEST NHE'}</h3>
-                      <div className="d-flex justify-content-center">
-                        <ReactPlayer
-                          url="https://vimeo.com/243556536"
-                          className="react-player"
-                          playing
-                          width="100%"
-                          height="100%"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-md-8 ml-auto mr-auto">
-                    <div className="row">
-                      <div className="col-md-6">
-                        <div className="blog-tags">
-                          {/* Tags:{' '}
-                          {tags &&
-                            tags.map((item, key) => (
-                              <span
-                                className="badge badge-primary badge-pill"
-                                key={key}
-                              >
-                                {item}
-                              </span>
-                            ))} */}
-                        </div>
-                      </div>
-                    </div>
-                    <hr />
-                    {/* {authorData && (
-                      <AuthorQuote
-                        image={authorData.avatar}
-                        authorName={authorData.fullName}
-                        AuthorQuote={authorData.quote}
-                      />
-                    )} */}
-                  </div>
-                </div>
-              </div>
-              {/* <ArticleContentComponent
-                  title={articleData.title}
+        ) : (
+          <div>
+            <ArticleDescriptionComponent
+              title={blogRadioData.title}
+              description={blogRadioData.description}
+              image={blogRadioData.largeThumbnail}
+            />
+            <div className="main main-raised" id="content-section">
+              <div className="container">
+                <ArticleContentComponent
+                  title={blogRadioData.title}
                   contents={contentData}
-                  tags={articleData.hastags}
+                  tags={blogRadioData.hastags}
+                  videoPlayer={
+                    <ReactPlayer
+                      url={blogRadioData.videoURL}
+                      className="react-player mt-2 mb-4"
+                      playing
+                      width="100%"
+                      height="377px"
+                    />
+                  }
                   authorData={authorData}
-                /> */}
+                />
 
-              {/* <ArticleCommentComponent articleData={articleData} /> */}
+                <ArticleCommentComponent
+                  url={`${URL}/radio?id=${blogRadioData.id}`}
+                  postId={blogRadioData.id}
+                  title={blogRadioData.title}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        {/* )} */}
+        )}
       </React.Fragment>
     );
   }
