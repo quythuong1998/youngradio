@@ -14,6 +14,7 @@ module.exports = {
     authorAvatar: async article => {
       const author = await Users.findOne({ id: article.author_id });
       return author.avatar;
-    }
+    },
+    videoURL: path('video_url')
   }
 };

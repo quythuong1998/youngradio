@@ -62,6 +62,10 @@ const BlogRadioSchema = Schema({
   length: {
     type: String,
     required: true
+  },
+  video_url: {
+    type: String,
+    required: true
   }
 });
 

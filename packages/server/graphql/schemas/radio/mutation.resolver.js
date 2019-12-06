@@ -34,7 +34,8 @@ module.exports = {
           length: formattedTime,
           small_thumbnail: smallThumbnail,
           large_thumbnail: largeThumbnail,
-          author_id: currentUser.id
+          author_id: currentUser.id,
+          video_url: videoURL
         });
 
         const blogRadio = new Radio(blogradioData);
