@@ -1,12 +1,12 @@
 import React from 'react';
 import AuthenHOC from '../components/HOC/AuthenHOC';
-import ShareComponent from '../components/ShareComponent';
+import ShareBlogRadioComponent from '../components/ShareBlogRadioComponent';
 import UserPageLayout from '../layouts/UserPageLayout';
 
-const SharePage = rootProps => (
+const CreateBlogRadioPage = rootProps => (
   <UserPageLayout {...rootProps} title="not config">
-    <ShareComponent />
+    <ShareBlogRadioComponent />
   </UserPageLayout>
 );
 
-export default AuthenHOC(SharePage);
+export default AuthenHOC(CreateBlogRadioPage);

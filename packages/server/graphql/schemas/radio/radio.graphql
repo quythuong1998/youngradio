@@ -1,0 +1,37 @@
+type Radio {
+  id: ID!
+  title: String!
+  content: String
+  authorId: String!
+  hastags: [String]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  view: Int!
+  description: String!
+  smallThumbnail: String!
+  largeThumbnail: String!
+  authorName: String!
+  authorAvatar: String!
+  isPublished: Boolean!
+  length: String!
+}
+
+type Query {
+  get_lasted_blog_radio: Radio!
+  get_blog_radio(id: String!): Radio!
+}
+
+type Mutation {
+  delete_blog_radio_temp(id: String!): Radio!
+  create_blog_radio_temp(videoURL: String!): Radio!
+  create_blog_radio(
+    id: String!
+    title: String!
+    content: String
+    hastags: [String]
+    description: String
+    smallThumbnail: String!
+    largeThumbnail: String!
+    length: String!
+  ): Radio!
+}

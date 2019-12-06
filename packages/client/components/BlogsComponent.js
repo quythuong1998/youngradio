@@ -14,16 +14,23 @@ import {
   getTypycalUsersDataSelector
 } from '../stores/UserState';
 
-import MostViewPostsComponent from '../components/MostViewPostsComponent';
-import RandomPostsComponent from '../components/RandomPostsComponent';
-import TypicalAuthorsComponent from '../components/TypicalAuthorsComponent';
-import LastedPostsComponent from '../components/LastedPostsComponent';
+import {
+  getLastedBlogRadio,
+  getLastedBlogRadioDataSelector
+} from '../stores/RadioState';
+
+import MostViewPostsComponent from './MostViewPostsComponent';
+import RandomPostsComponent from './RandomPostsComponent';
+import TypicalAuthorsComponent from './TypicalAuthorsComponent';
+import LastedPostsComponent from './LastedPostsComponent';
+import LastedRadioComponent from './LastedRadioComponent';
 
 const connectToRedux = connect(
   createStructuredSelector({
     mostViewArticles: mostViewArticlesDataSelector,
     lastedArticles: lastedArticlesDataSelector,
-    typycalUsers: getTypycalUsersDataSelector
+    typycalUsers: getTypycalUsersDataSelector,
+    lastedBlogRadio: getLastedBlogRadioDataSelector
   }),
   dispatch => ({
     GetMostViewArticles: amount => {
@@ -34,6 +41,9 @@ const connectToRedux = connect(
     },
     GetTypycalUsers: () => {
       dispatch(getTypycalUsers());
+    },
+    getLastedBlogRadio: () => {
+      dispatch(getLastedBlogRadio());
     }
   })
 );
@@ -45,13 +55,15 @@ class IndexBodyComponent extends React.Component {
     this.props.GetMostViewArticles(MOST_VIEW_ARTICLES);
     this.props.GetLastedArticles(LASTED_ARTICLES);
     this.props.GetTypycalUsers();
+    this.props.getLastedBlogRadio();
   }
 
   render() {
     const {
       mostViewArticles = [],
       lastedArticles = [],
-      typycalUsers = []
+      typycalUsers = [],
+      lastedBlogRadio = []
     } = this.props;
     return (
       <div className="main main-raised">
@@ -59,15 +71,23 @@ class IndexBodyComponent extends React.Component {
           <div className="section">
             <div className="row">
               <div className="col-md-8 ml-auto mr-auto text-center">
-                <h2 className="title">From my heart with love ...</h2>
+                <h2 className="title">New radio from my heart with love ...</h2>
               </div>
             </div>
           </div>
+          <LastedRadioComponent lastedBlogRadio={lastedBlogRadio} />
           <MostViewPostsComponent mostViewArticlesData={mostViewArticles} />
           <LastedPostsComponent lastedArticlesData={lastedArticles} />
           <RandomPostsComponent />
           <TypicalAuthorsComponent typycalUsersData={typycalUsers} />
         </div>
+        <style jsx>
+          {`
+            .section {
+              padding: 40px 0;
+            }
+          `}
+        </style>
       </div>
     );
   }
