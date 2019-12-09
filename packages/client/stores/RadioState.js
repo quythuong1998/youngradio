@@ -9,6 +9,43 @@ export const CREATE_BLOG_RADIO_TEMP_API = 'CreateBlogRadioTempAPI';
 export const DELETE_BLOG_RADIO_TEMP_API = 'DeleteBlogRadioTempAPI';
 export const GET_LASTED_BLOG_RADIO_API = 'GetLastedBlogRadioAPI';
 export const GET_BLOG_RADIO_API = 'GetBlogRadioAPI';
+export const GET_ALL_BLOG_RADIO_API = 'GetAllBlogRadioAPI';
+
+export const GetAllBlogRadioAPI = makeFetchAction(
+  GET_ALL_BLOG_RADIO_API,
+  gql`
+    query {
+      get_all_blog_radio {
+        title
+        description
+        length
+        smallThumbnail
+        largeThumbnail
+        id
+        authorName
+      }
+    }
+  `
+);
+
+export const getAllBlogRadio = () => {
+  return respondToSuccess(GetAllBlogRadioAPI.actionCreator({}), resp => {
+    if (resp.errors) {
+      console.error('Err:', resp.errors);
+      return;
+    }
+    return;
+  });
+};
+
+export const getAllBlogRadioDataSelector = flow(
+  GetAllBlogRadioAPI.dataSelector,
+  path('data.get_all_blog_radio')
+);
+
+export const resetDataGetAllBlogRadio = dispatch => {
+  dispatch(GetAllBlogRadioAPI.resetter(['data', 'error']));
+};
 
 export const GetBlogRadioAPI = makeFetchAction(
   GET_BLOG_RADIO_API,

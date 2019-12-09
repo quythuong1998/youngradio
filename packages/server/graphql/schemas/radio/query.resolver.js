@@ -12,6 +12,9 @@ module.exports = {
 
     get_blog_radio: async (_, { id }) => {
       return Radio.findOne({ id });
+    },
+    get_all_blog_radio: async () => {
+      return Radio.find({}).sort([['created_at', -1]]);
     }
   }
 };
