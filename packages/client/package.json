@@ -19,6 +19,7 @@
     "moment": "^2.24.0",
     "next": "latest",
     "next-redux-wrapper": "^3.0.0",
+    "nprogress": "^0.2.0",
     "prettier": "1.18.2",
     "react": "^16.7.0",
     "react-ckeditor-component": "^1.1.0",
