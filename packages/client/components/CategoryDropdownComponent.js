@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-
+import Link from 'next/link';
 import {
   getAllCategory,
   getAllCategorySelector
@@ -29,10 +29,12 @@ class CategoryDropdownComponent extends React.Component {
     return (
       <React.Fragment>
         <li className="nav-item">
-          <a href="#pablo" className="nav-link">
-            Radio blog
-            <div className="ripple-container"></div>
-          </a>
+          <Link href="/radio-blogs">
+            <a className="nav-link">
+              Radio blog
+              <div className="ripple-container"></div>
+            </a>
+          </Link>
         </li>
         <li className="dropdown nav-item">
           <a
