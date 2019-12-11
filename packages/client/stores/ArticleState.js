@@ -367,6 +367,10 @@ export const getArticlesByCategoryDataSelector = flow(
   path('data.get_articles_by_category')
 );
 
+export const resetDataGetArticlesByCategory = dispatch => {
+  dispatch(GetArticlesByCategoryAPI.resetter(['data', 'error']));
+};
+
 const GetArticlesByRandomCategoryAPI = makeFetchAction(
   GET_ARTICLES_BY_RANDOM_CATEGORY,
   gql`

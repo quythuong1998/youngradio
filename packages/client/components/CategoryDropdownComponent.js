@@ -47,9 +47,11 @@ class CategoryDropdownComponent extends React.Component {
           <div className="dropdown-menu dropdown-with-icons">
             {categories &&
               categories.map((item, index) => (
-                <a href="#" className="dropdown-item" key={index}>
-                  <i className="material-icons">layers</i> {item.name}
-                </a>
+                <Link href={`/category?id=${item.id}`}>
+                  <a className="dropdown-item" key={index}>
+                    <i className="material-icons">layers</i> {item.name}
+                  </a>
+                </Link>
               ))}
           </div>
         </li>
