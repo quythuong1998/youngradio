@@ -3,7 +3,14 @@ import Popup from 'reactjs-popup';
 import Link from 'next/link';
 class UserCardBlogComponent extends React.Component {
   render() {
-    const { category, title, image, actionDelete, articleId } = this.props;
+    const {
+      category,
+      title,
+      image,
+      actionDelete,
+      articleId,
+      isOwnerArticle = false
+    } = this.props;
     return (
       <div className="col-lg-4 col-md-6">
         <div className="rotating-card-container">
@@ -24,62 +31,76 @@ class UserCardBlogComponent extends React.Component {
                 </h4>
               </div>
             </div>
-            <div className="back">
-              <div className="card-body">
-                <h5 className="card-title">Manage Post</h5>
-                <p className="card-description">
-                  You can edit or delete the posts.
-                </p>
-                <div className="footer text-center">
+            {isOwnerArticle ? (
+              <div className="back">
+                <div className="card-body">
+                  <h5 className="card-title">Manage Post</h5>
+                  <p className="card-description">
+                    You can edit or delete the posts.
+                  </p>
+                  <div className="footer text-center">
+                    <Link href={`/article?id=${articleId}`}>
+                      <a className="btn btn-rose btn-round">
+                        <i className="material-icons">subject</i> Read
+                        <div className="ripple-container"></div>
+                      </a>
+                    </Link>
+                    <Link href={'edit-article?id=' + articleId}>
+                      <a className="btn btn-success btn-just-icon btn-fill btn-round btn-wd ml-2">
+                        <i className="material-icons">mode_edit</i>
+                      </a>
+                    </Link>
+                    <Popup
+                      trigger={
+                        <a
+                          href="#pablo"
+                          className="btn btn-danger btn-just-icon btn-fill btn-round ml-2"
+                        >
+                          <i className="material-icons">delete</i>
+                        </a>
+                      }
+                      modal
+                    >
+                      {close => (
+                        <div>
+                          <div className="modal-body text-center">
+                            <h5>Are you sure you want to delete this? </h5>
+                          </div>
+                          <div className="justify-content-center ">
+                            <button
+                              type="button"
+                              className="btn btn-danger btn-link"
+                              onClick={actionDelete}
+                            >
+                              Yes
+                            </button>
+                            <button
+                              type="button"
+                              className="btn btn-success btn-link"
+                              onClick={() => close()}
+                            >
+                              No
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </Popup>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="back">
+                <div className="card-body">
+                  {' '}
                   <Link href={`/article?id=${articleId}`}>
                     <a className="btn btn-rose btn-round">
                       <i className="material-icons">subject</i> Read
                       <div className="ripple-container"></div>
                     </a>
                   </Link>
-                  <Link href={'edit-article?id=' + articleId}>
-                    <a className="btn btn-success btn-just-icon btn-fill btn-round btn-wd ml-2">
-                      <i className="material-icons">mode_edit</i>
-                    </a>
-                  </Link>
-                  <Popup
-                    trigger={
-                      <a
-                        href="#pablo"
-                        className="btn btn-danger btn-just-icon btn-fill btn-round ml-2"
-                      >
-                        <i className="material-icons">delete</i>
-                      </a>
-                    }
-                    modal
-                  >
-                    {close => (
-                      <div>
-                        <div className="modal-body text-center">
-                          <h5>Are you sure you want to delete this? </h5>
-                        </div>
-                        <div className="justify-content-center ">
-                          <button
-                            type="button"
-                            className="btn btn-danger btn-link"
-                            onClick={actionDelete}
-                          >
-                            Yes
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-success btn-link"
-                            onClick={() => close()}
-                          >
-                            No
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </Popup>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
