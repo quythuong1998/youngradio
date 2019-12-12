@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 
-const { MONGODB_URI, MONGO_DB, NODE_ENV, MONGO_OPTIONS } = process.env;
-const dbName = MONGO_DB || 'YoungRadio';
-const mongoUrl = MONGODB_URI || 'mongodb://localhost:27017' + dbName;
+const { MONGODB_URI, NODE_ENV, MONGO_OPTIONS } = process.env;
+const mongoUrl = MONGODB_URI || 'mongodb://localhost:27017/YoungRadio';
 
 const options = MONGO_OPTIONS
   ? JSON.parse(MONGO_OPTIONS)
