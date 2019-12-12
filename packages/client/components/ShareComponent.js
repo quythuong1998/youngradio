@@ -14,9 +14,8 @@ class ShareComponent extends React.Component {
               <div className="col-md-8 ml-auto mr-auto text-center">
                 <h1 className="title">Share Your Feeling</h1>
                 <h4>
-                  To get started, you will need to choose a plan for your needs.
-                  You can opt in for the monthly of annual options and go with
-                  one fo the three listed below.
+                  I feel it is important to share your feelings for it provides
+                  you to not have the weight of them on your shoulders as much.
                 </h4>
               </div>
             </div>

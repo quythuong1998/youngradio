@@ -24,12 +24,7 @@ const CardWithTopImageComponent = ({
             <a>{title}</a>
           </Link>
         </h4>
-        <p className="card-description">
-          {description}
-          <Link href={`/article?id=${articleId}`}>
-            <a href={`/article?id=${articleId}`}> Read More </a>
-          </Link>
-        </p>
+        <p className="card-description text-description">{description}</p>
       </div>
     </div>
   </div>
