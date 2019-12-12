@@ -4,8 +4,6 @@ import NProgress from 'nprogress';
 import Router from 'next/router';
 
 const nprogress = () => {
-  // NProgress.configure({ showSpinner: false });
-
   //set variable to count number of calling API;
   let callingAPIs = 0;
 
