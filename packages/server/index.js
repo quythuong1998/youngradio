@@ -30,8 +30,7 @@ server.applyMiddleware({
 });
 
 const env = process.env.NODE_ENV || 'development';
-const port = process.env.NODE_PORT || 3003;
-// const port = process.env.PORT || 3003;
+const port = process.env.PORT || 3003;
 
 app.listen({ port }, () => {
   console.log('environment:', env);
