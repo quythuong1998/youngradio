@@ -214,8 +214,8 @@ export const resetDataCreateArticle = dispatch => {
 const GetUserArticlesAPI = makeFetchAction(
   GET_USER_ARTICLES_API,
   gql`
-    query {
-      get_user_articles {
+    query($userId: String!) {
+      get_user_articles(userId: $userId) {
         description
         imageDescription
         title
@@ -226,20 +226,27 @@ const GetUserArticlesAPI = makeFetchAction(
   `
 );
 
-export const getUserArticles = () => {
-  return respondToSuccess(GetUserArticlesAPI.actionCreator({}), resp => {
-    if (resp.errors) {
-      console.error('Err:', resp.errors);
+export const getUserArticles = userId => {
+  return respondToSuccess(
+    GetUserArticlesAPI.actionCreator({ userId }),
+    resp => {
+      if (resp.errors) {
+        console.error('Err:', resp.errors);
+        return;
+      }
       return;
     }
-    return;
-  });
+  );
 };
 
 export const getUserArticlesDataSelector = flow(
   GetUserArticlesAPI.dataSelector,
   path('data.get_user_articles')
 );
+
+export const resetDataGetUserArticles = dispatch => {
+  dispatch(GetUserArticlesAPI.resetter(['data', 'error']));
+};
 
 const GetLastedArticlesAPI = makeFetchAction(
   GET_LASTED_ARTICLES_API,
@@ -366,6 +373,10 @@ export const getArticlesByCategoryDataSelector = flow(
   GetArticlesByCategoryAPI.dataSelector,
   path('data.get_articles_by_category')
 );
+
+export const resetDataGetArticlesByCategory = dispatch => {
+  dispatch(GetArticlesByCategoryAPI.resetter(['data', 'error']));
+};
 
 const GetArticlesByRandomCategoryAPI = makeFetchAction(
   GET_ARTICLES_BY_RANDOM_CATEGORY,

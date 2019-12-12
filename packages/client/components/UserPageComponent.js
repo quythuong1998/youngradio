@@ -5,42 +5,62 @@ import { createStructuredSelector } from 'reselect';
 import UserCardBlogComponent from './UserCardBlogComponent';
 
 import {
-  getCurrentUser,
+  getAuthorById,
+  getAuthorByIdDataSelector,
+  resetDataGetAuthorById,
   getCurrentUserDataSelector
 } from '../stores/UserState';
 
 import {
   getUserArticles,
   getUserArticlesDataSelector,
+  resetDataGetUserArticles,
   deleteArticle
 } from '../stores/ArticleState';
 
 const connectToRedux = connect(
   createStructuredSelector({
-    currentUser: getCurrentUserDataSelector,
-    articles: getUserArticlesDataSelector
+    userData: getAuthorByIdDataSelector,
+    articles: getUserArticlesDataSelector,
+    currentUser: getCurrentUserDataSelector
   }),
   dispatch => ({
-    GetCurrentUser: () => {
-      dispatch(getCurrentUser());
+    getUserById: authorId => {
+      dispatch(getAuthorById(authorId));
     },
-    GetAllArticle: () => {
-      dispatch(getUserArticles());
+    GetUserArticle: userId => {
+      dispatch(getUserArticles(userId));
     },
     DeleteArticle: id => {
       dispatch(deleteArticle(id));
+    },
+
+    resetData: () => {
+      resetDataGetUserArticles(dispatch);
+      resetDataGetAuthorById(dispatch);
     }
   })
 );
 
 class UserPageComponent extends React.Component {
   componentDidMount() {
-    this.props.GetCurrentUser();
-    this.props.GetAllArticle();
+    const { userId, currentUser } = this.props;
+    const userIdToGetData = userId.id ? userId.id : currentUser.id;
+    this.props.getUserById(userIdToGetData);
+    this.props.GetUserArticle(userIdToGetData);
+  }
+  componentWillUnmount() {
+    this.props.resetData();
   }
 
   render() {
-    const { currentUser, articles, DeleteArticle } = this.props;
+    const {
+      userData = [],
+      articles = [],
+      DeleteArticle,
+      currentUser
+    } = this.props;
+
     return (
       <div className="profile-page sidebar-collapse">
         <div
@@ -54,23 +74,23 @@ class UserPageComponent extends React.Component {
                 <div className="col-md-6 ml-auto mr-auto">
                   <div className="profile">
                     <div className="avatar">
-                      {currentUser.avatar && (
+                      {userData.avatar && (
                         <img
-                          src={currentUser.avatar}
+                          src={userData.avatar}
                           alt="user-avatar"
                           className="img-raised rounded-circle img-fluid"
                         />
                       )}
                     </div>
                     <div className="name">
-                      <h3 className="title">{currentUser.fullName}</h3>
-                      <h6>{currentUser.profession}</h6>
+                      <h3 className="title">{userData.fullName}</h3>
+                      <h6>{userData.profession}</h6>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="description text-center">
-                <p>{currentUser.quote && currentUser.quote}</p>
+                <p>{userData.quote && userData.quote}</p>
               </div>
               <hr />
               <div className="row">
@@ -90,6 +110,7 @@ class UserPageComponent extends React.Component {
                             key={index}
                             actionDelete={() => DeleteArticle(item.id)}
                             articleId={item.id}
+                            isOwnerArticle={currentUser.id === userData.id}
                           />
                         ))
                       ) : (

@@ -42,12 +42,8 @@ class RadioBlogsComponent extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-md-8 ml-auto mr-auto text-center">
-                <h1 className="title">Let&apos;s get started</h1>
-                <h4>
-                  To get started, you will need to choose a plan for your needs.
-                  You can opt in for the monthly of annual options and go with
-                  one fo the three listed below.
-                </h4>
+                <h1 className="title">Radio from my heart</h1>
+                <h4>Let's listen the radio shared by many young people.</h4>
               </div>
             </div>
           </div>
@@ -55,8 +51,7 @@ class RadioBlogsComponent extends React.Component {
         <div className="main main-raised">
           <div className="container">
             <div className="row">
-              <div className="col-md-12 col-sm-12">
-                <h2 className="title text-center mb-4"> Share your article </h2>
+              <div className="col-md-12 col-sm-12 pt-4">
                 {blogRadioData &&
                   blogRadioData.map((radio, index) => (
                     <div className="pb-2">
