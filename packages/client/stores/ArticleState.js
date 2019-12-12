@@ -12,6 +12,43 @@ export const GET_ARTICLE = 'GetArticle';
 export const EDIT_ARTICLE = 'EditArticle';
 export const GET_ARTICLES_BY_CATEGORY = 'GetArticlesByCategory';
 export const GET_ARTICLES_BY_RANDOM_CATEGORY = 'GetArticlesByRandomCategory';
+export const GET_ARTICLES_BY_HASHTAG_API = 'GetArticleByHashTagAPI';
+
+const GetArticleByHashTagAPI = makeFetchAction(
+  GET_ARTICLES_BY_HASHTAG_API,
+  gql`
+    query($hashtag: String!) {
+      get_articles_by_hashtag(hashtag: $hashtag) {
+        id
+        title
+        description
+        content
+        categoryId
+        hastags
+        imageDescription
+        authorId
+      }
+    }
+  `
+);
+
+export const getArticleByHashTag = hashtag =>
+  respondToSuccess(GetArticleByHashTagAPI.actionCreator({ hashtag }), resp => {
+    if (resp.errors) {
+      console.error('Err:', resp.errors);
+      return;
+    }
+    return;
+  });
+
+export const getArticleByHashTagDataSelector = flow(
+  GetArticleByHashTagAPI.dataSelector,
+  path('data.get_articles_by_hashtag')
+);
+
+export const resetDataGetArticleByHashTag = dispatch => {
+  dispatch(GetArticleByHashTagAPI.resetter(['data', 'error']));
+};
 
 export const resetDataEditArticle = dispatch => {
   dispatch(EditArticleAPI.resetter(['data', 'error']));

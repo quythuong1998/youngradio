@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import moment from 'moment';
 
 const CardWithSideImageComponent = ({
   category,
@@ -12,7 +13,7 @@ const CardWithSideImageComponent = ({
   authorId,
   articleId
 }) => (
-  <div className="col-lg-4 col-md-6">
+  <div className="col-lg-4 col-md-6 d-flex align-items-stretch">
     <div className="card card-blog">
       <div className="card-header card-header-image">
         <Link href={`/article?id=${articleId}`}>
@@ -21,14 +22,14 @@ const CardWithSideImageComponent = ({
           </a>
         </Link>
       </div>
-      <div className="card-body ">
+      <div className="card-body">
         <h6 className="card-category text-success">{category}</h6>
         <h4 className="card-title">
           <Link href={`/article?id=${articleId}`}>
             <a>{title}</a>
           </Link>
         </h4>
-        <p className="card-description">{description}</p>
+        <p className="card-description text-description">{description}</p>
       </div>
       <div className="card-footer ">
         <div className="author">
@@ -40,7 +41,8 @@ const CardWithSideImageComponent = ({
           </Link>
         </div>
         <div className="stats ml-auto">
-          <i className="material-icons">schedule</i> {time}
+          <i className="material-icons">schedule</i>{' '}
+          {moment(time).format('DD MMM YYYY')}
         </div>
       </div>
     </div>

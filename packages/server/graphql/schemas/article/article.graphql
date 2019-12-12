@@ -23,6 +23,7 @@ type Query {
   get_article(id: String!): Article!
   get_articles_by_category(categoryId: String!): [Article]!
   get_articles_by_random_category: [Article]!
+  get_articles_by_hashtag(hashtag: String!): [Article!]!
 }
 
 type Mutation {

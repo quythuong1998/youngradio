@@ -17,7 +17,10 @@ const ArticleDescriptionComponent = ({ title, description, image }) => (
     <style jsx>
       {`
           .background-article {
-              background-image: url("${image}");
+              background-image: url("${image}");  
+          }
+          .page-header{
+            margin-top: -25px;
           }
         `}
     </style>

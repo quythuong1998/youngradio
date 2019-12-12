@@ -37,6 +37,10 @@ module.exports = {
       return Articles.find({ category_id: categoryId }).sort(
         sortDefaultOptions
       );
+    },
+    //Refactor later: hastag -> hashtag
+    get_articles_by_hashtag: async (_, { hashtag }) => {
+      return await Articles.find({ hastags: hashtag }).sort(sortDefaultOptions);
     }
   }
 };

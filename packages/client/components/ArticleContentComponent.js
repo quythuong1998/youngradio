@@ -1,19 +1,21 @@
 import React from 'react';
-
-const AuthorQuote = ({ image, authorName, AuthorQuote }) => (
+import Link from 'next/link';
+const AuthorQuote = ({ image, authorName, authorQuote, authorId }) => (
   <div className="card card-profile card-plain">
     <div className="row">
       <div className="col-md-2">
         <div className="card-avatar">
-          <a href="#pablo">
-            <img className="img" src={image} alt="author-avt" />
-          </a>
+          <Link href={`/user?id=${authorId}`}>
+            <a href="#pablo">
+              <img className="img" src={image} alt="author-avt" />
+            </a>
+          </Link>
           <div className="ripple-container"></div>
         </div>
       </div>
       <div className="col-md-8">
         <h4 className="card-title">{authorName}</h4>
-        <p className="description">{AuthorQuote}</p>
+        <p className="description">{authorQuote}</p>
       </div>
     </div>
   </div>
@@ -43,12 +45,16 @@ class ArticleContentComponent extends React.Component {
                   Tags:{' '}
                   {tags &&
                     tags.map((item, key) => (
-                      <span
-                        className="badge badge-primary badge-pill"
-                        key={key}
-                      >
-                        {item}
-                      </span>
+                      <Link href={`/hastag?keyword=${item.id}`}>
+                        <a>
+                          <span
+                            className="badge badge-primary badge-pill ml-2"
+                            key={key}
+                          >
+                            #{item}
+                          </span>
+                        </a>
+                      </Link>
                     ))}
                 </div>
               </div>
@@ -58,7 +64,8 @@ class ArticleContentComponent extends React.Component {
               <AuthorQuote
                 image={authorData.avatar}
                 authorName={authorData.fullName}
-                AuthorQuote={authorData.quote}
+                authorQuote={authorData.quote}
+                authorId={authorData.id}
               />
             )}
           </div>
