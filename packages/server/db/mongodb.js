@@ -1,20 +1,15 @@
 import mongoose from 'mongoose';
 
-const { MONGO_URL, MONGO_DB, NODE_ENV, MONGO_OPTIONS } = process.env;
-// const { MONGODB_URI, MONGO_DB, NODE_ENV, MONGO_OPTIONS } = process.env;
-const mongoUrl = MONGO_URL || 'mongodb://localhost:27017';
+const { MONGODB_URI, MONGO_DB, NODE_ENV, MONGO_OPTIONS } = process.env;
 const dbName = MONGO_DB || 'YoungRadio';
+const mongoUrl = MONGODB_URI || 'mongodb://localhost:27017' + dbName;
 
 const options = MONGO_OPTIONS
   ? JSON.parse(MONGO_OPTIONS)
-  : { useNewUrlParser: true };
-
-// const options = MONGO_OPTIONS
-// ? JSON.parse(MONGO_OPTIONS)
-// : { useNewUrlParser: true, useUnifiedTopology: true };
+  : { useNewUrlParser: true, useUnifiedTopology: true };
 
 module.exports = mongoose
-  .connect(mongoUrl + '/' + dbName, options)
+  .connect(mongoUrl, options)
   .then(resp => {
     if (NODE_ENV !== 'test' && resp) {
       console.log('mongo is running on: ', mongoUrl);
