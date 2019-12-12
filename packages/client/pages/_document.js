@@ -58,6 +58,11 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
           />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="/static/customs/nprogress.css"
+          />
         </Head>
         <body className="">
           <div id="mobile-overlay" className="ks-mobile-overlay" />
