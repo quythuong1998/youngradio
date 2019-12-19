@@ -52,6 +52,15 @@ class UserDropdownComponent extends React.Component {
             </a>
           </Link>
 
+          {/* FIX LATER */}
+          {user && user.role === 'ADMIN' && (
+            <Link href="/admin-dashboard">
+              <a href="#" className="dropdown-item">
+                <i className="material-icons mr-2">build</i> Admin dashboard
+              </a>
+            </Link>
+          )}
+
           <a href="#pablo" className="dropdown-item">
             <i className="material-icons mr-2">settings</i> Settings and other
             stuff

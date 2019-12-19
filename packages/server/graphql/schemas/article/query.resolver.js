@@ -1,5 +1,6 @@
 import { combineResolvers } from 'graphql-resolvers';
 import { Articles, Categories } from '../../../services';
+import { isAdmin } from '../../libs';
 import { sortDefaultOptions } from '../../libs/options';
 
 module.exports = {
@@ -38,6 +39,11 @@ module.exports = {
         sortDefaultOptions
       );
     },
+
+    get_all_articles: combineResolvers(isAdmin, async () => {
+      return Articles.find({});
+    }),
+
     //Refactor later: hastag -> hashtag
     get_articles_by_hashtag: async (_, { hashtag }) => {
       return await Articles.find({ hastags: hashtag }).sort(sortDefaultOptions);

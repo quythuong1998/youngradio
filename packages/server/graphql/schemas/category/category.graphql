@@ -2,6 +2,8 @@ type Category {
   id: ID!
   name: String!
   description: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Query {
@@ -11,4 +13,6 @@ type Query {
 
 type Mutation {
   create_category(name: String!, description: String!): Category!
+  delete_category(id: String!): Category!
+  edit_category(id: String!, name: String!, description: String!): Category!
 }

@@ -44,6 +44,23 @@
   width: 80px;
 }
 
+.icon-custom {
+  padding: 24px 0 0px;
+}
+.icon-custom i {
+  font-size: 55px;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  width: 130px;
+  line-height: 130px;
+  height: 130px;
+  color: green;
+  border-color: green;
+}
+.center {
+  text-align: center;
+}
+
 .text-description {
   overflow: hidden;
   text-overflow: ellipsis;
