@@ -28,6 +28,7 @@ const connectToRedux = connect(
 class ArticleByHashtagComponent extends React.Component {
   componentDidMount() {
     const { keyword } = this.props;
+    console.log(keyword);
     this.props.getArticleByHashTag(keyword.hashtag);
   }
 

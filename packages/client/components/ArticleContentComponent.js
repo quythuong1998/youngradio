@@ -45,7 +45,7 @@ class ArticleContentComponent extends React.Component {
                   Tags:{' '}
                   {tags &&
                     tags.map((item, key) => (
-                      <Link href={`/hastag?keyword=${item.id}`}>
+                      <Link href={`/hashtag?keyword=${item}`}>
                         <a>
                           <span
                             className="badge badge-primary badge-pill ml-2"
