@@ -18,12 +18,13 @@ type Article {
 
 type Query {
   get_most_view_articles(amount: Int!): [Article!]!
-  get_user_articles: [Article!]!
+  get_user_articles(userId: String!): [Article!]!
   get_lasted_articles(amount: Int!): [Article!]!
   get_article(id: String!): Article!
   get_articles_by_category(categoryId: String!): [Article]!
   get_articles_by_random_category: [Article]!
   get_all_articles: [Article!]!
+  get_articles_by_hashtag(hashtag: String!): [Article!]!
 }
 
 type Mutation {

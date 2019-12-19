@@ -8,6 +8,7 @@ type Category {
 
 type Query {
   get_all_category: [Category!]!
+  get_category_info(categoryId: String!): Category!
 }
 
 type Mutation {

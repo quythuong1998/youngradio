@@ -7,7 +7,7 @@ import apiMiddlewares from '../middlewares';
 import apiPrefix from '../middlewares/api-prefix';
 import rootReducer from './rootReducer'; //view
 import { isServer } from '../libs';
-
+import nprogress from '../middlewares/nprogress';
 const env = process.env.NODE_ENV || 'development';
 
 const logger = () => next => action => {
@@ -30,7 +30,8 @@ const makeStore = initialState => {
       reduxArrayMiddleware,
       apiPrefix(base),
       apiMiddlewares,
-      apiReactionMiddleware
+      apiReactionMiddleware,
+      nprogress
     ),
     typeof window !== 'undefined' &&
       window.__REDUX_DEVTOOLS_EXTENSION__ &&

@@ -2,12 +2,11 @@ import { makeFetchAction } from 'redux-api-call';
 import { respondToSuccess } from '../middlewares/api-reaction';
 import { flow, path } from 'lodash/fp';
 import { gql } from '../libs/graphql';
-// import { createErrorSelector } from './AdminState';
-
 export const GET_ALL_CATEGORY_API = 'GetAllCategoryAPI';
 export const CREATE_CATEGORY_API = 'CreateCategoryAPI';
 export const DELETE_CATEGORY_API = 'DeleteCategoryAPI';
 export const EDIT_CATEGORY_API = 'EditCategoryAPI';
+export const GET_CATEGORY_INFO_API = 'GetCategoryInfoAPI';
 
 const EditCategoryAPI = makeFetchAction(
   EDIT_CATEGORY_API,
@@ -15,6 +14,19 @@ const EditCategoryAPI = makeFetchAction(
     mutation($id: String!, $name: String!, $description: String!) {
       edit_category(id: $id, name: $name, description: $description) {
         name
+        description
+      }
+    }
+  `
+);
+
+const GetCategoryInfoAPI = makeFetchAction(
+  GET_CATEGORY_INFO_API,
+  gql`
+    query($categoryId: String!) {
+      get_category_info(categoryId: $categoryId) {
+        name
+        description
       }
     }
   `
@@ -88,6 +100,19 @@ export const createCategory = (name, description) => {
   );
 };
 
+export const getCategoryInfo = categoryId => {
+  return respondToSuccess(
+    GetCategoryInfoAPI.actionCreator({ categoryId }),
+    resp => {
+      if (resp.errors) {
+        console.error('Err:', resp.errors);
+        return;
+      }
+      return;
+    }
+  );
+};
+
 export const createCategorySelector = flow(
   CreateCategoryAPI.dataSelector,
   path('data.create_category')
@@ -95,6 +120,15 @@ export const createCategorySelector = flow(
 
 export const resetDataCreateCategory = dispatch => {
   dispatch(CreateCategoryAPI.resetter(['data', 'error']));
+};
+
+export const getCategoryInfoDataSelector = flow(
+  GetCategoryInfoAPI.dataSelector,
+  path('data.get_category_info')
+);
+
+export const resetDataGetCategoryInfo = dispatch => {
+  dispatch(GetCategoryInfoAPI.resetter(['data', 'error']));
 };
 
 const GetAllCategoryAPI = makeFetchAction(
